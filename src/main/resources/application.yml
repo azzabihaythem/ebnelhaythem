@@ -1,0 +1,12 @@
+server:
+  port: 8081
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:mysql://localhost:3306/ebnelhaythem
+    username: root
+    password: test
+    driver-class-name: com.mysql.cj.jdbc.Driver
