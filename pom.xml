@@ -15,6 +15,7 @@
 	<description>2021 version of ebnelhaythem</description>
 	<properties>
 		<java.version>11</java.version>
+		<lombok.version>1.18.18</lombok.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -35,6 +36,32 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.23</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+				<scope>runtime</scope>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
