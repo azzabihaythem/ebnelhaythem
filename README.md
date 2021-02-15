@@ -53,4 +53,4 @@ http://localhost:8081/explorer/index.html#uri=/
 http://localhost:8080/v2/api-docs
 
 #swagger ui
-
+http://localhost:8080/swagger-ui.html
