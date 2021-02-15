@@ -41,3 +41,16 @@ FLUSH PRIVILEGES;
 test is the password
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'test';
+
+
+#run
+mvn spring-boot:run
+
+#hal
+http://localhost:8081/explorer/index.html#uri=/
+
+#swagger doc
+http://localhost:8080/v2/api-docs
+
+#swagger ui
+
