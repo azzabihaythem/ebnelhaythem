@@ -8,7 +8,7 @@ cmd
 
 https://rauf-rahman.medium.com/connect-docker-and-mysql-in-right-way-95602f833cb0
 
-doker run -d -p 3306:3306 --name=HomeServer1 --env="MYSQL_ROOT_PASSWORD"="test" mysql
+docker run -d -p 3306:3306 --name=HomeServer1 --env="MYSQL_ROOT_PASSWORD"="test" mysql
 
 
 list of img :
