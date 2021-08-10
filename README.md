@@ -54,3 +54,17 @@ http://localhost:8080/v2/api-docs
 
 #swagger ui
 http://localhost:8080/swagger-ui.html
+
+
+
+#create token 
+1-create user/password :
+post http://localhost:8080/cachedemo/v1/users/signup with object
+{
+"username":"***",
+"password":"***"
+}
+and  header   Content-Type:application/json
+2-login with the same user  and header
+Get http://localhost:8080/login
+the token will be in the response in the header

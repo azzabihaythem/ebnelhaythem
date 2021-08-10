@@ -13,8 +13,8 @@ public interface UserRepository extends CrudRepository<User, Long>,
 		JpaRepository<User, Long> {
 
 	User findByUsernameLike(String username);
-	
-    List<User> findByRolesLike(String role);
+
+//    List<User> findByRolesLike(String role);
 	
 	
 }
