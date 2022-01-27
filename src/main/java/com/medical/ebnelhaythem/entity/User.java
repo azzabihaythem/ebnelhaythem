@@ -20,10 +20,10 @@ import java.util.List;
 public class User extends AbstractPersistable<Long> {
 
 	@JsonProperty
-	@Column(name = "USER_NAME", unique = true)
+	@Column(unique = true)
 	private String login;
 
-	@JsonProperty("password")
+	@JsonProperty
 	@Column
 	private String password;
 
