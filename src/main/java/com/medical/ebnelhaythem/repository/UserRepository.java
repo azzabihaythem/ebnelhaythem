@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<User, Long>,
 		JpaRepository<User, Long> {
 
-	User findByUsernameLike(String username);
+	User findByLogin(String login);
 
 //    List<User> findByRolesLike(String role);
 	

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,13 +19,25 @@ import java.util.List;
 @NoArgsConstructor
 public class User extends AbstractPersistable<Long> {
 
-	@JsonProperty("username")
+	@JsonProperty
 	@Column(name = "USER_NAME", unique = true)
-	private String username;
+	private String login;
 
 	@JsonProperty("password")
-	@Column(name = "PASSWORD")
+	@Column
 	private String password;
+
+	@JsonProperty
+	@Column
+	private String firstName;
+
+	@JsonProperty
+	@Column
+	private String lastName;
+
+	@JsonProperty
+	@Column
+	private Date birthDate;
 
 	//@ManyToMany
 	//private List<Role> roles;

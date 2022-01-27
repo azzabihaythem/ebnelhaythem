@@ -34,7 +34,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
                 try {
                         com.medical.ebnelhaythem.entity.User creds = new ObjectMapper().readValue(request.getInputStream(), com.medical.ebnelhaythem.entity.User.class);
-                        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(), creds.getPassword(),new ArrayList<>()));
+                        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getLogin(), creds.getPassword(),new ArrayList<>()));
                 }
                 catch(IOException e) {
                         throw new RuntimeException("Could not read request" + e);
