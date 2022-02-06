@@ -6,11 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
-
+import java.util.List;
 
 @Entity
 @Table
@@ -18,18 +16,18 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PriseEnCharge extends BaseEntity {
+public class Facture extends BaseEntity {
 
     @JsonProperty
-    @Column(unique = true)
-    private String numeroPriseEnCharge;
+    @ManyToOne
+    private Patient patient;
+
+    @JsonProperty
+    @OneToMany
+    private List<Seance> seances;
 
     @JsonProperty
     @Column
-    private Date dateDebut;
-
-    @JsonProperty
-    @Column
-    private Date dateFin;
+    private Date date;
 
 }

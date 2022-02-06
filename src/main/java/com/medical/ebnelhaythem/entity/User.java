@@ -5,19 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 
 @Entity
-@Table(name = "user")
+@Table
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends AbstractPersistable<Long> {
+public class User extends BaseEntity {
 
 	@JsonProperty
 	@Column(unique = true)
@@ -38,6 +37,10 @@ public class User extends AbstractPersistable<Long> {
 	@JsonProperty
 	@Column
 	private Date birthDate;
+
+	@JsonProperty
+	@Column
+	private boolean active;
 
 	//@ManyToMany
 	//private List<Role> roles;

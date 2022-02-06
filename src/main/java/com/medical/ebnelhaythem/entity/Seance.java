@@ -6,30 +6,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity
-@Table
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PriseEnCharge extends BaseEntity {
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "patient_id","date"})})
+public class Seance extends BaseEntity {
 
     @JsonProperty
-    @Column(unique = true)
-    private String numeroPriseEnCharge;
+    @ManyToOne
+    @JoinColumn
+    private Patient patient;
 
     @JsonProperty
     @Column
-    private Date dateDebut;
+    private Date date;
 
-    @JsonProperty
-    @Column
-    private Date dateFin;
 
 }

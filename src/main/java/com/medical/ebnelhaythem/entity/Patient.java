@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Patient extends AbstractPersistable<Long>{
+public class Patient extends BaseEntity{
 
     @JsonProperty
     @OneToOne
@@ -39,7 +39,8 @@ public class Patient extends AbstractPersistable<Long>{
     @OneToMany
     private List<PriseEnCharge> priseEnCharges;
 
-
-
+    @JsonProperty
+    @Column
+    private Date desactivationDate;
 
 }
