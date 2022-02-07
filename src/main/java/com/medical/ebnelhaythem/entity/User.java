@@ -5,6 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +22,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class User extends AbstractPersistable<Long> {
 
 	@JsonProperty
 	@Column(unique = true)
@@ -41,6 +48,14 @@ public class User extends BaseEntity {
 	@JsonProperty
 	@Column
 	private boolean active;
+
+	@Column
+	@CreatedDate
+	private Date creationDate;
+
+	@Column
+	@LastModifiedDate
+	private Date updateDate;
 
 	//@ManyToMany
 	//private List<Role> roles;

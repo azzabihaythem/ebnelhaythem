@@ -1,11 +1,12 @@
 package com.medical.ebnelhaythem.controller;
 
 
+import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.entity.User;
-import com.medical.ebnelhaythem.repository.UserRepository;
+import com.medical.ebnelhaythem.service.PatientService;
+import com.medical.ebnelhaythem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,12 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "/cachedemo/v1/users")
+@RequestMapping(value = "/v1/users")
 public class UserController {
 
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+
+    @Autowired
+    private PatientService patientService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -39,6 +43,12 @@ public class UserController {
 
     {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        userService.save(user);
+    }
+
+    @PostMapping(path = "/patients", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public void postPatient(@RequestBody Patient patient){
+        patientService.save(patient);
     }
 }

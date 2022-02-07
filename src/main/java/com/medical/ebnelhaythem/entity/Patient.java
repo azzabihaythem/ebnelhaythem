@@ -36,7 +36,7 @@ public class Patient extends BaseEntity{
     private String numAffiliation;
 
     @JsonProperty
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<PriseEnCharge> priseEnCharges;
 
     @JsonProperty

@@ -59,7 +59,7 @@ http://localhost:8080/swagger-ui.html
 
 #create token 
 1-create user/password :
-post http://localhost:8080/cachedemo/v1/users/signup with object
+post http://localhost:8080/v1/users/signup with object
 {
 "username":"***",
 "password":"***"

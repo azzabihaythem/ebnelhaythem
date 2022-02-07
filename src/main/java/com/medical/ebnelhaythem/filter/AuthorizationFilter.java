@@ -1,5 +1,6 @@
 package com.medical.ebnelhaythem.filter;
 
+import com.medical.ebnelhaythem.utils.Constants;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,7 +34,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         if(token != null) {
-            String user = Jwts.parser().setSigningKey("SecretKeyToGenJWTs".getBytes())
+            String user = Jwts.parser().setSigningKey(Constants.SECRET_KEY_TO_GEN_JWTS.getBytes())
             .parseClaimsJws(token.replace("Bearer",""))
             .getBody()
             .getSubject();

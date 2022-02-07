@@ -1,6 +1,7 @@
 package com.medical.ebnelhaythem.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.medical.ebnelhaythem.utils.Constants;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,7 +46,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 String token = Jwts.builder()
                 .setSubject(((User) authentication.getPrincipal()).getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + 864_000_000))
-                .signWith(SignatureAlgorithm.HS512, "SecretKeyToGenJWTs".getBytes())
+                .signWith(SignatureAlgorithm.HS512, Constants.SECRET_KEY_TO_GEN_JWTS.getBytes())//todo update the value of the SecretKeyToGenJWTs
                 .compact();
 
 
