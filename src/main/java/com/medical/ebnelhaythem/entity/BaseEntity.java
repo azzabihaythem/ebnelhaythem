@@ -18,7 +18,11 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
-public abstract class BaseEntity extends AbstractPersistable<Long> {
+public abstract class BaseEntity {
+
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(updatable = false)
     @CreatedDate

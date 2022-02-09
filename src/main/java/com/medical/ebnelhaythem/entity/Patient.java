@@ -20,7 +20,7 @@ import java.util.List;
 public class Patient extends BaseEntity{
 
     @JsonProperty
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private User user;
 
     @JsonProperty

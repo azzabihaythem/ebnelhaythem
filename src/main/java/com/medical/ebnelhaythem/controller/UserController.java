@@ -3,6 +3,7 @@ package com.medical.ebnelhaythem.controller;
 
 import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.entity.User;
+import com.medical.ebnelhaythem.model.PatientModel;
 import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +40,21 @@ public class UserController {
 
     @PostMapping(path = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public void signUp(@RequestBody User user)
+    public User signUp(@RequestBody User user)
 
     {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.save(user);
+        return userService.save(user);
     }
 
+    /**
+     * create patient (with user and prise en charge) endPoint
+     * @param patient
+     * @return
+     */
     @PostMapping(path = "/patients", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public void postPatient(@RequestBody Patient patient){
-        patientService.save(patient);
+    public Patient postPatient(@RequestBody PatientModel patientModel){
+        return patientService.save(patientModel);
     }
 }
