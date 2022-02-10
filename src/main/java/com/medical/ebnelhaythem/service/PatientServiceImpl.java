@@ -1,8 +1,8 @@
 package com.medical.ebnelhaythem.service;
 
+import com.medical.ebnelhaythem.dto.PatientDto;
 import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.mapper.MainMapper;
-import com.medical.ebnelhaythem.model.PatientModel;
 import com.medical.ebnelhaythem.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,9 +17,9 @@ public class PatientServiceImpl implements PatientService{
     //private MainMapper mainMapper;
 
     @Override
-    public Patient save(PatientModel patientModel) {
+    public Patient save(PatientDto patientModel) {
 
-        return patientRepository.save(MainMapper.INSTANCE.toEntity(patientModel));
+        return patientRepository.save(MainMapper.INSTANCE.convertToEntity(patientModel));
 
     }
 }

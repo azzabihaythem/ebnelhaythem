@@ -1,4 +1,4 @@
-package com.medical.ebnelhaythem.model;
+package com.medical.ebnelhaythem.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class BasicModel {
+public abstract class BasicDto {
 
     private long id;
 

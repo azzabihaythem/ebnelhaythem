@@ -3,7 +3,7 @@ package com.medical.ebnelhaythem.controller;
 
 import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.entity.User;
-import com.medical.ebnelhaythem.model.PatientModel;
+import com.medical.ebnelhaythem.dto.PatientDto;
 import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class UserController {
      */
     @PostMapping(path = "/patients", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Patient postPatient(@RequestBody PatientModel patientModel){
+    public Patient postPatient(@RequestBody PatientDto patientModel){
         return patientService.save(patientModel);
     }
 }

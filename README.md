@@ -2,7 +2,8 @@
 
 https://start.spring.io/
 
-cmd
+#tech
+spring boot, java, rest, jwt, Junit, lombok, mapstruct, hibernate, swagger, docker  
 
 #create the image
 

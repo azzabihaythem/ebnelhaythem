@@ -1,4 +1,4 @@
-package com.medical.ebnelhaythem.model;
+package com.medical.ebnelhaythem.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserModel extends BasicModel{
+public class UserDto extends BasicDto {
 
     private String login;
 
@@ -31,5 +31,5 @@ public class UserModel extends BasicModel{
 
     private Date updateDate;
 
-    private List<RoleModel> roles;
+    private List<RoleDto> roles;
 }

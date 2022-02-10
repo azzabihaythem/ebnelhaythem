@@ -45,13 +45,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
 
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors().and().csrf().disable().authorizeRequests()
-        .antMatchers(AUTH_WHITELIST).permitAll()
-        .antMatchers(HttpMethod.POST, "/v1/users/signup").permitAll()
-        .anyRequest().authenticated()
-        .and().addFilter(new AuthenticationFilter(authenticationManager()))
-        .addFilter(new AuthorizationFilter(authenticationManager()))
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        httpSecurity.cors()
+                .and()
+                    .csrf().disable().authorizeRequests()
+                        .antMatchers(AUTH_WHITELIST)
+                            .permitAll()
+                        .antMatchers(HttpMethod.POST, "/v1/users/signup")
+                            .permitAll()
+                        .anyRequest()
+                            .authenticated()
+                .and()
+                    .addFilter(new AuthenticationFilter(authenticationManager()))
+                    .addFilter(new AuthorizationFilter(authenticationManager()))
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         }
 
    /* public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {

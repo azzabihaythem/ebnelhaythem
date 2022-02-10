@@ -1,4 +1,4 @@
-package com.medical.ebnelhaythem.model;
+package com.medical.ebnelhaythem.dto;
 
 import com.medical.ebnelhaythem.entity.PriseEnCharge;
 import lombok.AllArgsConstructor;
@@ -13,9 +13,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientModel extends BasicModel{
+public class PatientDto extends BasicDto {
 
-    private UserModel user;
+    private UserDto user;
 
     private String doit;
 
