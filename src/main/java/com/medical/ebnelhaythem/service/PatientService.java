@@ -6,6 +6,6 @@ import com.medical.ebnelhaythem.dto.PatientDto;
 
 public interface PatientService {
 
-    public Patient save(PatientDto patientModel);
+    public PatientDto save(PatientDto patientDto);
 
 }

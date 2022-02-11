@@ -49,12 +49,12 @@ public class UserController {
 
     /**
      * create patient (with user and prise en charge) endPoint
-     * @param patient
+     * @param patientDto
      * @return
      */
     @PostMapping(path = "/patients", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Patient postPatient(@RequestBody PatientDto patientModel){
-        return patientService.save(patientModel);
+    public PatientDto postPatient(@RequestBody PatientDto patientDto){
+        return patientService.save(patientDto);
     }
 }
