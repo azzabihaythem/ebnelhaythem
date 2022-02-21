@@ -14,10 +14,10 @@
 	<name>ebnelhaythem</name>
 	<description>2021 version of ebnelhaythem</description>
 	<properties>
-		<maven-compiler.source>11</maven-compiler.source>
-		<maven-compiler.target>11</maven-compiler.target>
-		<java.version>11</java.version>
-		<lombok.version>1.18.18</lombok.version>
+		<maven-compiler.source>17</maven-compiler.source>
+		<maven-compiler.target>17</maven-compiler.target>
+		<java.version>17</java.version>
+		<lombok.version>1.18.22</lombok.version>
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 	</properties>
 	<dependencies>
@@ -86,11 +86,13 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
+
 		<!-- JSON WEB TOKEN -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>

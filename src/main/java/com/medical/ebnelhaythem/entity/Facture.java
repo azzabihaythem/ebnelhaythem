@@ -18,6 +18,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Facture extends BaseEntity {
 
+
+    @Column
+    private String number;
+
     @JsonProperty
     @ManyToOne
     private Patient patient;

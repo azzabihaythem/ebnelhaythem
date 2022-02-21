@@ -24,8 +24,8 @@ public class EbnelhaythemApplication {
 		List<Role> roleList = roleRepository.findAll();
 		logger.info("init *****************");
 		if(roleList.isEmpty()){
-			roleList.add(new Role("admin"));
-			roleList.add(new Role("patient"));
+			roleList.add(new Role(0,"admin"));
+			roleList.add(new Role(0,"patient"));
 			roleRepository.saveAll(roleList);
 		}
 	}

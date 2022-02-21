@@ -3,7 +3,7 @@
 https://start.spring.io/
 
 #tech
-spring boot, java, rest, jwt, Junit, lombok, mapstruct, hibernate, swagger, docker  
+spring boot, java 17, maven 3.8.4, rest, jwt, Junit, lombok, mapstruct, hibernate, swagger, docker  
 
 #create the image
 
@@ -56,6 +56,8 @@ http://localhost:8080/v2/api-docs
 #swagger ui
 http://localhost:8080/swagger-ui.html
 
+#run app 
+mvn spring-boot:run
 
 
 #create token 

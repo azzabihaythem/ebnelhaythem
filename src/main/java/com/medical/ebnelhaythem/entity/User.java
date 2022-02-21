@@ -56,8 +56,12 @@ public class User extends AbstractPersistable<Long> {
 	@LastModifiedDate
 	private Date updateDate;
 
-	//@ManyToMany
-	//private List<Role> roles;
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinTable(name="user_roles",
+			joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
+			inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
+	)
+	private List<Role> roles;
 
 
 }

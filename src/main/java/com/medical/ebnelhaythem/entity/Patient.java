@@ -43,4 +43,10 @@ public class Patient extends BaseEntity{
     @Column
     private Date desactivationDate;
 
+    @JsonProperty
+    @Column
+    private boolean active;
+
+
+
 }

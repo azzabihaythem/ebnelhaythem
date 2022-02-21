@@ -13,7 +13,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role extends BaseEntity {
+public class Role {
+
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private long id;
 
 	private String role;
 

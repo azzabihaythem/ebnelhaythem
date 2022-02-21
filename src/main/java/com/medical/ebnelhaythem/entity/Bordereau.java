@@ -19,8 +19,7 @@ import java.util.List;
 public class Bordereau extends BaseEntity{
 
     @Column
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private String borderauNumber;
+    private String number;
 
     @JsonProperty
     @OneToMany

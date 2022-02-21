@@ -22,14 +22,14 @@ public class PriseEnCharge extends BaseEntity {
 
     @JsonProperty
     @Column(unique = true)
-    private String numeroPriseEnCharge;
+    private String number;
 
     @JsonProperty
     @Column
-    private Date dateDebut;
+    private Date startDate;
 
     @JsonProperty
     @Column
-    private Date dateFin;
+    private Date endDate;
 
 }
