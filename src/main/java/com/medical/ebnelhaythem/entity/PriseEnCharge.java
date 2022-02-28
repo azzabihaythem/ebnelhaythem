@@ -1,10 +1,7 @@
 package com.medical.ebnelhaythem.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class PriseEnCharge extends BaseEntity {
 
     @JsonProperty

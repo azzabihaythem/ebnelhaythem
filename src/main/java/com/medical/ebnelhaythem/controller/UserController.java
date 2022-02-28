@@ -1,13 +1,14 @@
 package com.medical.ebnelhaythem.controller;
 
 
-import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.entity.User;
 import com.medical.ebnelhaythem.dto.PatientDto;
 import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +55,10 @@ public class UserController {
      */
     @PostMapping(path = "/patients", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public PatientDto postPatient(@RequestBody PatientDto patientDto){
-        return patientService.save(patientDto);
+    public ResponseEntity<?> postPatient(@RequestBody PatientDto patientDto){
+
+         patientService.save(patientDto);
+
+        return new ResponseEntity(patientService.save(patientDto), HttpStatus.CREATED);
     }
 }

@@ -1,10 +1,7 @@
 package com.medical.ebnelhaythem.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -17,10 +14,7 @@ import java.util.List;
 
 @Entity
 @Table
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @EntityListeners(AuditingEntityListener.class)
 public class User extends AbstractPersistable<Long> {
 
