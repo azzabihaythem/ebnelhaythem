@@ -1,10 +1,10 @@
 server:
-  port: 8080
+  port: 9090
 spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
   datasource:
     url: jdbc:mysql://localhost:3306/ebnelhaythem
     username: root

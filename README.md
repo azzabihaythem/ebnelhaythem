@@ -71,3 +71,7 @@ and  header   Content-Type:application/json
 2-login with the same user  and header
 Get http://localhost:8080/login
 the token will be in the response in the header
+
+#use profile :
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+or add to Environment Variable : spring.profiles.active=dev
