@@ -3,7 +3,7 @@
 https://start.spring.io/
 
 #tech
-spring boot, java 17, maven 3.8.4, rest, jwt, Junit, lombok, mapstruct, hibernate, swagger, docker  
+spring boot, java 17, maven 3.8.4, rest, jwt, Junit, lombok, mapstruct, hibernate, MySql, swagger, docker  
 
 #create the image
 
@@ -14,7 +14,7 @@ docker run -d -p 3306:3306 --name=HomeServer1 --env="MYSQL_ROOT_PASSWORD"="test"
 
 list of img :
 
-docker ps
+docker p?s
 
 
 #go inside the container  
