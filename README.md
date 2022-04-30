@@ -75,3 +75,6 @@ the token will be in the response in the header
 #use profile :
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 or add to Environment Variable : spring.profiles.active=dev
+
+#start project using docker-compose
+docker-compose up -d
