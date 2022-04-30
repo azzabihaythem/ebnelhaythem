@@ -30,15 +30,12 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-/*
-    public UserController(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
 
- */
-
-
+    /**
+     * Create a new user
+     * @param user
+     * @return
+     */
     @PostMapping(path = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public User signUp(@RequestBody User user)

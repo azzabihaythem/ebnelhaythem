@@ -3,49 +3,8 @@
 https://start.spring.io/
 
 #tech
-spring boot, java 17, maven 3.8.4, rest, jwt, Junit, lombok, mapstruct, hibernate, MySql, swagger, docker  
-
-#create the image
-
-https://rauf-rahman.medium.com/connect-docker-and-mysql-in-right-way-95602f833cb0
-
-docker run -d -p 3306:3306 --name=HomeServer1 --env="MYSQL_ROOT_PASSWORD"="test" mysql
-
-
-list of img :
-
-docker p?s
-
-
-#go inside the container  
-
-docker exec -it <docker container> mysql -uroot -p
-
-#or
-
-(if problem of connection)
-
-docker exec -it HomeServer1 bash
-
-mysql -u root -p
-
-use mysql
-
-select host, user from user;
-
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Your New Strong Password';
-
-FLUSH PRIVILEGES;
-
-#create dataBaseUser
-
-test is the password
-
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'test';
-
-
-#run
-mvn spring-boot:run
+spring boot 2.4.2, java 17, maven 3.8.4, rest, jwt, Junit, lombok, mapstruct, hibernate, MySql 5.7, swagger, docker, 
+docker_compose
 
 #hal
 http://localhost:8081/explorer/index.html#uri=/
@@ -59,6 +18,8 @@ http://localhost:8080/swagger-ui.html
 #run app 
 mvn spring-boot:run
 
+#start project using docker-compose
+docker-compose up -d
 
 #create token 
 1-create user/password :
@@ -76,5 +37,4 @@ the token will be in the response in the header
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 or add to Environment Variable : spring.profiles.active=dev
 
-#start project using docker-compose
-docker-compose up -d
+
