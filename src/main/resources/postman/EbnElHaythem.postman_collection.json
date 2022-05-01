@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8080/login",
+			"name": "LOGIN",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -34,12 +34,12 @@
 					"raw": "{\r\n    \"login\":\"zannovich\",\r\n    \"password\":\"helloworld\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/login",
+					"raw": "http://localhost:{{SERVER_PORT}}/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "{{SERVER_PORT}}",
 					"path": [
 						"login"
 					]
@@ -48,7 +48,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/v1/users/signup",
+			"name": "Signup",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -60,15 +60,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"active\": false,\r\n  \"birthDate\": \"2022-02-07T10:05:32.355Z\",\r\n  \"firstName\": \"haythem\",\r\n  \"lastName\": \"azzabi\",\r\n  \"login\": \"zannovich\",\r\n  \"password\": \"helloworld\"\r\n}"
+					"raw": "{\r\n  \"active\": false,\r\n  \"birthDate\": \"2022-02-07T10:05:32.355Z\",\r\n  \"firstName\": \"haythem\",\r\n  \"lastName\": \"azzabi\",\r\n  \"login\": \"zannovich\",\r\n\r\n  \"password\": \"helloworld\"\r\n}\r\n"
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/users/signup",
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/users/signup",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "{{SERVER_PORT}}",
 					"path": [
 						"v1",
 						"users",
@@ -79,7 +79,10 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/custom",
+			"name": "get custom",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -93,13 +96,17 @@
 				},
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://localhost:8080/custom",
+					"raw": "http://localhost:{{SERVER_PORT}}/custom",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "{{SERVER_PORT}}",
 					"path": [
 						"custom"
 					]
@@ -108,7 +115,48 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/patients",
+			"name": "post patients",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"affile\": \"affile\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"doit\",\r\n  \"numAffiliation\": \"numAffiliation1000\",\r\n      \"priseEnCharges\": [\r\n        {\r\n            \"numeroPriseEnCharge\": \"numeroPriseEnCharge3\",\r\n            \"dateDebut\": \"2022-02-07T10:28:51.338+00:00\",\r\n            \"dateFin\": \"2022-02-07T10:28:51.338+00:00\"\r\n        },\r\n        {\r\n            \"numeroPriseEnCharge\": \"numeroPriseEnCharge4\",\r\n            \"dateDebut\": \"2022-02-07T10:28:51.338+00:00\",\r\n            \"dateFin\": \"2022-02-07T10:28:51.338+00:00\"\r\n        }\r\n    ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"string\",\r\n    \"login\": \"string\",\r\n    \"password\": \"string\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\"\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/users/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"users",
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post patients copy",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -133,12 +181,12 @@
 					"raw": "{\r\n  \"affile\": \"string\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"string\",\r\n  \"id\": 0,\r\n  \"numAffiliation\": \"string\",\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"dateDebut\": \"2022-02-07T10:28:51.338Z\",\r\n      \"dateFin\": \"2022-02-07T10:28:51.338Z\",\r\n      \"numeroPriseEnCharge\": \"string\"\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"string\",\r\n    \"login\": \"string\",\r\n    \"password\": \"string\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\"\r\n  }\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/users/patients",
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/users/patients",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "{{SERVER_PORT}}",
 					"path": [
 						"v1",
 						"users",
@@ -147,6 +195,36 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVER_PORT",
+			"value": "8080"
+		},
+		{
+			"key": "TOKEN\n",
+			"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6YW5ub3ZpY2giLCJleHAiOjE2NTIyMjQzNTd9.Y2wEoDLV4zZ8sflcOI8TBcWflSh-TDKDQlYqfLVKqw6WqQEfK5v0OuIV5szePo1zdNZElYGRtjlQtV1-Dlcy7w"
 		}
 	]
 }
