@@ -38,3 +38,10 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 or add to Environment Variable : spring.profiles.active=dev
 
 
+#logs
+#list containrs 
+docker ps
+#show logs
+docker logs [OPTIONS] CONTAINER
+
+
