@@ -3,7 +3,7 @@
 https://start.spring.io/
 
 #tech
-spring boot 2.4.2, java 17, maven 3.8.4, rest, jwt, Junit, lombok, mapstruct, hibernate, MySql 5.7, swagger, docker, 
+spring boot 2.6.7, java 17, maven 3.8.4, rest, jwt, Junit, lombok, mapstruct, hibernate, MySql 5.7, swagger, docker, 
 docker_compose
 
 #hal

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.slf4j.Logger;
 
 @RestController
 @RequestMapping(value = "/v1/users")
@@ -30,6 +30,8 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(UserController.class);
+
 
     /**
      * Create a new user
@@ -41,6 +43,7 @@ public class UserController {
     public User signUp(@RequestBody User user)
 
     {
+        log.info("This is a test log signUp");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userService.save(user);
     }
@@ -53,7 +56,7 @@ public class UserController {
     @PostMapping(path = "/patients", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> postPatient(@RequestBody PatientDto patientDto){
-
+        log.info("This is a test log postPatient");
          patientService.save(patientDto);
 
         return new ResponseEntity(patientService.save(patientDto), HttpStatus.CREATED);
