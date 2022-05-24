@@ -25,68 +25,12 @@ services:
         "spring.datasource.username" : "$MYSQLDB_USER",
         "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
+        "spring.jpa.hibernate.ddl-auto" : "update",
+        "spring.application.name" : "ebnelhaythem"
       }'
     volumes:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0
-    container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
-      - xpack.security.enabled=true
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-    networks:
-      - elastic
-  # https://www.elastic.co/guide/en/logstash/current/docker-config.html
-  logstash:
-    image: logstash:$ELK_VERSION
-    ports:
-      - "5000:5000"
-      - "9600:9600"
-    environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-      ELASTIC_USER: $ELASTIC_USER
-      ELASTIC_PASSWORD: $ELASTIC_PASSWORD
-      #XPACK_MONITORING_ELASTICSEARCH_USERNAME: $ELASTIC_USER
-      #XPACK_MONITORING_ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-      XPACK_MONITORING_ELASTICSEARCH_USERNAME: $ELASTIC_USER
-      XPACK_MONITORING_ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-      XPACK_MONITORING_ELASTICSEARCH_HOSTS: "elasticsearch:9200"
-      XPACK_MONITORING_ENABLED: "true"
-    volumes:
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
-    networks:
-      - elastic
-    restart: unless-stopped
-    depends_on:
-      - elasticsearch
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.12.0
-    container_name: kibana
-    environment:
-      - ELASTICSEARCH_USERNAME=$ELASTIC_USER
-      - ELASTICSEARCH_PASSWORD=$ELASTIC_PASSWORD
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    ports:
-      - 5601:5601
-    depends_on:
-      - elasticsearch
-    networks:
-      - elastic
 volumes:
   db:
-  elasticsearch-data:
-    driver: local
-networks:
-  elastic:
-    driver: bridge
