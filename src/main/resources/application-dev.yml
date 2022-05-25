@@ -1,12 +1,15 @@
 server:
-  port: 9090
+  port: 6868
 spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      #ddl-auto: create-drop
+      ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/ebnelhaythem
-    username: root
-    password: test
+    #   url: jdbc:mysql://localhost:3306/ebnelhaythem
+    url: jdbc:mysql://localhost:3307/ebnelhaythem_db
+    #username: root
+    #password: test
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
