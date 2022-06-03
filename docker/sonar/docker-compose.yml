@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  sonarqube:
+    image: sonarqube:lts
+    ports:
+      - "9000:9000"
+    volumes:
+      # - "conf:/opt/sonarqube/conf"
+      - "extensions:/opt/sonarqube/extensions"
+      - "logs:/opt/sonarqube/logs"
+      - "data:/opt/sonarqube/data"
+    depends_on:
+      - postgres
+    environment:
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=sonar
+      - sonar.jdbc.url=jdbc:postgresql://postgres/sonarqube
+
+
+  postgres:
+    image: postgres:12
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonarqube
+      PGDATA: pg_data:/var/lib/postgresql/data/pgdata
+
+volumes:
+  data:
+  logs:
+  extensions:
+  pg_data:

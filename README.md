@@ -34,7 +34,7 @@ Get http://localhost:8080/login
 the token will be in the response in the header
 
 #use profile :
-mvn spring-boot:run -Dspring-boot.run.profiles=dev
+mvn spring-boot:run -Dspring-boot.run.prozfiles=dev
 or add to Environment Variable : spring.profiles.active=dev
 
 
@@ -44,4 +44,13 @@ docker ps
 #show logs
 docker logs [OPTIONS] CONTAINER
 
+
+#sonar
+start sonar : 
+cd sonar
+docker-compose up
+http://localhost:9000/about
+default credential (admin,admin)
+a9ccaefd04ffea084edb372eeb471f22829dae9c is an example of sonar generated token 
+mvn sonar:sonar -Dsonar.login=a9ccaefd04ffea084edb372eeb471f22829dae9c
 
