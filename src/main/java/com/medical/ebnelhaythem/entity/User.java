@@ -18,6 +18,11 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class User extends AbstractPersistable<Long> {
 
+
+	@JoinColumn(name="clinique_id", nullable=false)
+	@ManyToOne
+	private Clinique clinique;
+
 	@JsonProperty
 	@Column(unique = true)
 	private String login;
