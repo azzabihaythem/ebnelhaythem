@@ -23,6 +23,10 @@ public class Patient extends BaseEntity{
 
     @JsonProperty
     @Column
+    private String seanceDays;
+
+    @JsonProperty
+    @Column
     private String affile;
 
     @JsonProperty
@@ -40,7 +44,5 @@ public class Patient extends BaseEntity{
     @JsonProperty
     @Column
     private boolean active;
-
-
 
 }
