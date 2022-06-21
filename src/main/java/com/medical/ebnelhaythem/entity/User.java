@@ -19,6 +19,7 @@ import java.util.List;
 public class User extends AbstractPersistable<Long> {
 
 
+	@JsonProperty
 	@JoinColumn(name="clinique_id", nullable=false)
 	@ManyToOne
 	private Clinique clinique;
@@ -47,14 +48,17 @@ public class User extends AbstractPersistable<Long> {
 	@Column
 	private boolean active;
 
+	@JsonProperty
 	@Column
 	@CreatedDate
 	private Date creationDate;
 
+	@JsonProperty
 	@Column
 	@LastModifiedDate
 	private Date updateDate;
 
+	@JsonProperty
 	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="user_roles",
 			joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},

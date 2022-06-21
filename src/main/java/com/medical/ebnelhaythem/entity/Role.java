@@ -2,6 +2,7 @@ package com.medical.ebnelhaythem.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Entity
@@ -13,8 +14,10 @@ public class Role {
 
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@JsonProperty
 	private long id;
 
+	@JsonProperty
 	private String role;
 
 }

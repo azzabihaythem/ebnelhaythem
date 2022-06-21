@@ -20,4 +20,8 @@ public class Seance extends BaseEntity {
     @Column
     private Date date;
 
+    @JsonProperty
+    @ManyToOne
+    private SeanceType seanceType;
+
 }

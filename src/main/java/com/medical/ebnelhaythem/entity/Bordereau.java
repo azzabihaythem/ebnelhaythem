@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 public class Bordereau extends BaseEntity{
 
+    @JsonProperty
     @Column
     private String number;
 

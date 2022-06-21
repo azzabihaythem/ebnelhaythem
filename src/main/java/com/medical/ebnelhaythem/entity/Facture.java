@@ -13,6 +13,7 @@ import java.util.List;
 public class Facture extends BaseEntity {
 
 
+    @JsonProperty
     @Column
     private String number;
 
