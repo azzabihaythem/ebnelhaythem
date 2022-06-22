@@ -3,6 +3,7 @@ package com.medical.ebnelhaythem.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -89,5 +90,9 @@ public class Bilan extends BaseEntity {
     @JsonProperty
     @Column(name = "OPTIONS")
     private String  options ;
+
+    @JsonProperty
+    @OneToMany
+    private List<PdfUrl> pdfUrls;
 
 }

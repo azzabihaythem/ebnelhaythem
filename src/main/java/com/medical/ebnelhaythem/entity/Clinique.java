@@ -14,6 +14,10 @@ public class Clinique extends BaseEntity{
 
     @JsonProperty
     @Column
+    private Boolean active;
+
+    @JsonProperty
+    @Column
     private String nom;
 
     @JsonProperty

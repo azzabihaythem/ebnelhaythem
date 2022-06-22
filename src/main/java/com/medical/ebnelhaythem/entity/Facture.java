@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 public class Facture extends BaseEntity {
 
-
     @JsonProperty
     @Column
     private String number;
@@ -28,5 +27,9 @@ public class Facture extends BaseEntity {
     @JsonProperty
     @Column
     private Date date;
+
+    @JsonProperty
+    @OneToMany
+    private List<PdfUrl> pdfUrls;
 
 }

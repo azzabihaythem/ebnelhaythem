@@ -13,6 +13,11 @@ import java.util.List;
 public class Bordereau extends BaseEntity{
 
     @JsonProperty
+    @JoinColumn(name="clinique_id", nullable=false)
+    @ManyToOne
+    private Clinique clinique;
+
+    @JsonProperty
     @Column
     private String number;
 
@@ -23,4 +28,9 @@ public class Bordereau extends BaseEntity{
     @JsonProperty
     @Column
     private Date date;
+
+    @JsonProperty
+    @OneToMany
+    private List<PdfUrl> pdfUrls;
+
 }
