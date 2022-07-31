@@ -5,6 +5,8 @@ import com.medical.ebnelhaythem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class UserServiceImpl implements UserService{
 
@@ -14,6 +16,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findByLogin(String login) {
         return userRepository.findByLogin(login);
+    }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 
     @Override

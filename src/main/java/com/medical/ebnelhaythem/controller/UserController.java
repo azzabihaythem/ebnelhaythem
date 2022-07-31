@@ -1,8 +1,11 @@
 package com.medical.ebnelhaythem.controller;
 
 
+import com.medical.ebnelhaythem.entity.Clinique;
+import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.entity.User;
 import com.medical.ebnelhaythem.dto.PatientDto;
+import com.medical.ebnelhaythem.service.CliniqueService;
 import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +31,12 @@ public class UserController {
     private PatientService patientService;
 
     @Autowired
+    private CliniqueService cliniqueService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(UserController.class);
-
 
     /**
      * Create a new user
@@ -49,16 +54,29 @@ public class UserController {
     }
 
     /**
+     * Create a new clinique
+     * @param clinique
+     * @return
+     */
+    @PostMapping(path = "/clinique", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Clinique postClinique(@RequestBody Clinique clinique)
+
+    {
+        return cliniqueService.save(clinique);
+    }
+
+    /**
      * create patient (with user and prise en charge) endPoint
-     * @param patientDto
+     * @param patient
      * @return
      */
     @PostMapping(path = "/patients", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> postPatient(@RequestBody PatientDto patientDto){
+    public ResponseEntity<?> postPatient(@RequestBody Patient patient){
         log.info("This is a test log postPatient");
-         patientService.save(patientDto);
+         //patientService.save(patientDto);
 
-        return new ResponseEntity(patientService.save(patientDto), HttpStatus.CREATED);
+        return new ResponseEntity(patientService.save(patient), HttpStatus.CREATED);
     }
 }

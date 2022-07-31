@@ -51,6 +51,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 
                 response.addHeader("Authorization","Bearer " + token);
+
                 }
 /*
 https://blog.softtek.com/en/token-based-api-authentication-with-spring-and-jwt

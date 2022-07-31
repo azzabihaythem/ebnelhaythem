@@ -17,11 +17,11 @@ public class PatientServiceImpl implements PatientService{
     //private MainMapper mainMapper;
 
     @Override
-    public PatientDto save(PatientDto patientDto) {
+    public Patient save(Patient patient) {
 
-        Patient  patient =  patientRepository.save(MainMapper.INSTANCE.convertToEntity(patientDto));
+       // Patient  patient =  patientRepository.save(MainMapper.INSTANCE.convertToEntity(patientDto));
 
-        return MainMapper.INSTANCE.convertToDto(patient);
+        return patientRepository.save(patient);
 
     }
 }

@@ -1,6 +1,8 @@
 package com.medical.ebnelhaythem;
 
+import com.medical.ebnelhaythem.entity.Clinique;
 import com.medical.ebnelhaythem.entity.Role;
+import com.medical.ebnelhaythem.repository.CliniqueRepository;
 import com.medical.ebnelhaythem.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +20,9 @@ public class EbnelhaythemApplication {
 	@Autowired
 	RoleRepository roleRepository;
 
+	@Autowired
+	CliniqueRepository cliniqueRepository;
+
 	@PostConstruct
 	public void init() {
 
@@ -27,6 +32,15 @@ public class EbnelhaythemApplication {
 			roleList.add(new Role(0,"admin"));
 			roleList.add(new Role(0,"patient"));
 			roleRepository.saveAll(roleList);
+		}
+
+		List<Clinique> cliniqueList = cliniqueRepository.findAll();
+
+		if(cliniqueRepository.findAll().size()==0){
+			cliniqueRepository.save(new Clinique(1,null,null,true,"ebnelhaythem","gabes",
+					"test","test","test",
+					"test","test","test","test",
+					"test"));
 		}
 	}
 

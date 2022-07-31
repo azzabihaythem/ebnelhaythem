@@ -7,4 +7,6 @@ public abstract class BasicDto {
 
     private long id;
 
+    private String cliniqueId;
+
 }

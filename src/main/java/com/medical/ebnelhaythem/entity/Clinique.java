@@ -1,16 +1,36 @@
 package com.medical.ebnelhaythem.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Table
 @Data
-public class Clinique extends BaseEntity{
+@AllArgsConstructor
+@NoArgsConstructor
+public class Clinique {
+
+    @JsonProperty
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @JsonProperty
+    @Column(updatable = false)
+    @CreatedDate
+    private Instant creationDate;
+
+    @JsonProperty
+    @Column
+    @LastModifiedDate
+    private Instant updateDate;
 
     @JsonProperty
     @Column
