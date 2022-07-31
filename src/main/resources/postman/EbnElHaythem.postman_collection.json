@@ -60,7 +60,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"active\": false,\r\n  \"birthDate\": \"2022-02-07T10:05:32.355Z\",\r\n  \"firstName\": \"haythem\",\r\n  \"lastName\": \"azzabi\",\r\n  \"login\": \"zannovich\",\r\n\r\n  \"password\": \"helloworld\"\r\n}\r\n"
+					"raw": "{\r\n  \"active\": false,\r\n  \"birthDate\": \"2022-02-07T10:05:32.355Z\",\r\n  \"firstName\": \"haythem\",\r\n  \"lastName\": \"azzabi453se2Sz3\",\r\n  \"login\": \"zannovich3532eSsz3\",\r\n\r\n  \"password\": \"helloworld\",\r\n  \"clinique\": { \r\n    \"id\": 1\r\n  }\r\n}\r\n"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/users/signup",
@@ -156,7 +156,7 @@
 			"response": []
 		},
 		{
-			"name": "post patients copy",
+			"name": "post clinique",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -187,6 +187,192 @@
 						"localhost"
 					],
 					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"users",
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"active\": false,\r\n  \"birthDate\": \"2022-02-07T10:05:32.355Z\",\r\n  \"firstName\": \"haythem\",\r\n  \"lastName\": \"azzabi453se2Sz3\",\r\n  \"login\": \"zannovich3532eSsz3\",\r\n\r\n  \"password\": \"helloworld\",\r\n  \"clinique\": { \r\n    \"id\": 1\r\n  }\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post clinique 8080",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6YW5ub3ZpY2gzNTMyZVNzejEzIiwiZXhwIjoxNjYwMTM4MjUzfQ.Bo45GYRh-ZYp2Dkio9-Hl7uyIsZS3Bhxotv79QqjoGM-QwuSQGKBUI1TSvjb_m5yYLPZCM63BZAtrHnLeMyXzA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"active\": true,\r\n  \"adress\": \"string\",\r\n  \"banqueName\": \"string\",\r\n  \"banqueNumber\": \"string\",\r\n  \"codeBureauxRegional\": \"string\",\r\n  \"codeCentre\": \"string\",\r\n  \"createUser\": \"string\",\r\n  \"creationDate\": \"2022-07-31T12:02:16.340Z\",\r\n  \"employNumber\": \"string\",\r\n  \"id\": 1,\r\n  \"nom\": \"ebnElhaythem clinique\",\r\n  \"registreDeCmmerce\": \"string\",\r\n  \"tel\": \"string\",\r\n  \"tva\": \"string\",\r\n  \"updateDate\": \"2022-07-31T12:02:16.340Z\",\r\n  \"updateUser\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/users/clinique",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"clinique"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup 8080",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"active\": false,\r\n  \"birthDate\": \"2022-02-07T10:05:32.355Z\",\r\n  \"firstName\": \"haythem\",\r\n  \"lastName\": \"azzabi453se2Sz3\",\r\n  \"login\": \"zannovich3532eSsz3\",\r\n\r\n  \"password\": \"helloworld\",\r\n  \"clinique\": { \r\n    \"id\": 1\r\n  }\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN 8080",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\":\"zannovich\",\r\n    \"password\":\"helloworld\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post patients 8080",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6YW5ub3ZpY2gzNTMyZVNzejEzIiwiZXhwIjoxNjYwMTQyODIzfQ.9FkqDWL4_qVp2mJeK6OLgY78Dw1w2YCR4WuknsemWd-eXla9pa4wVvtkYWu0Zky9iKTS2sokfZ718X58D4z-MQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"active\": true,\r\n  \"affile\": \"string\",\r\n  \"clinique\": {\r\n    \"id\": 1 \r\n  },\r\n  \"createUser\": \"string\",\r\n  \"creationDate\": \"2022-07-31T15:02:07.484Z\",\r\n  \"desactivationDate\": \"2022-07-31T15:02:07.484Z\",\r\n  \"doit\": \"string\",\r\n  \"id\": 0,\r\n  \"numAffiliation\": \"string\",\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"clinique\": {\r\n        \"id\": 0\r\n      },\r\n      \"createUser\": \"string\",\r\n      \"creationDate\": \"2022-07-31T15:02:07.484Z\",\r\n      \"endDate\": \"2022-07-31T15:02:07.484Z\",\r\n      \"id\": 0,\r\n      \"number\": \"string\",\r\n      \"startDate\": \"2022-07-31T15:02:07.484Z\"\r\n    }\r\n  ],\r\n  \"seanceDays\": \"string\",\r\n  \"user\": {\r\n    \"id\": 1 \r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/users/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
 					"path": [
 						"v1",
 						"users",
