@@ -89,7 +89,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6YW5ub3ZpY2giLCJleHAiOjE2NDUwOTM5NTh9.yMRePDG99XKY4Kh06i3queUR2fjiOuyHE3gg62TuWmotGLhpiY_XD67QJtppaIqUJ4PO1cwzN_4bsJiAPufnIA",
+							"value": "",
 							"type": "string"
 						}
 					]
@@ -163,7 +163,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6YW5ub3ZpY2giLCJleHAiOjE2NDUxMTAwMDF9.k2CjCqr2qQuG69HJaYfCXmRXmdPWCBl5sTIxORYQbjfCZKEZ_-kaUyazI74hr9r-aV8Q3nGcOb_0hrcd_Ke8wA",
+							"value": "",
 							"type": "string"
 						}
 					]
@@ -235,7 +235,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6YW5ub3ZpY2gzNTMyZVNzejEzIiwiZXhwIjoxNjYwMTM4MjUzfQ.Bo45GYRh-ZYp2Dkio9-Hl7uyIsZS3Bhxotv79QqjoGM-QwuSQGKBUI1TSvjb_m5yYLPZCM63BZAtrHnLeMyXzA",
+							"value": "",
 							"type": "string"
 						}
 					]
@@ -281,7 +281,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"active\": false,\r\n  \"birthDate\": \"2022-02-07T10:05:32.355Z\",\r\n  \"firstName\": \"haythem\",\r\n  \"lastName\": \"azzabi453se2Sz3\",\r\n  \"login\": \"zannovich3532eSsz3\",\r\n\r\n  \"password\": \"helloworld\",\r\n  \"clinique\": { \r\n    \"id\": 1\r\n  }\r\n}\r\n"
+					"raw": "{\r\n  \"active\": false,\r\n  \"birthDate\": \"2022-02-07T10:05:32.355Z\",\r\n  \"firstName\": \"haythem2\",\r\n  \"lastName\": \"azzabi453se2Sz3\",\r\n  \"login\": \"zannovich3532eSsSSz13\",\r\n\r\n  \"password\": \"helloworld\",\r\n  \"clinique\": { \r\n    \"id\": 1\r\n  }\r\n}\r\n"
 				},
 				"url": {
 					"raw": "http://localhost:8080/v1/users/signup",
@@ -349,7 +349,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6YW5ub3ZpY2gzNTMyZVNzejEzIiwiZXhwIjoxNjYwMTQyODIzfQ.9FkqDWL4_qVp2mJeK6OLgY78Dw1w2YCR4WuknsemWd-eXla9pa4wVvtkYWu0Zky9iKTS2sokfZ718X58D4z-MQ",
+							"value": "",
 							"type": "string"
 						}
 					]
@@ -364,7 +364,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"active\": true,\r\n  \"affile\": \"string\",\r\n  \"clinique\": {\r\n    \"id\": 1 \r\n  },\r\n  \"createUser\": \"string\",\r\n  \"creationDate\": \"2022-07-31T15:02:07.484Z\",\r\n  \"desactivationDate\": \"2022-07-31T15:02:07.484Z\",\r\n  \"doit\": \"string\",\r\n  \"id\": 0,\r\n  \"numAffiliation\": \"string\",\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"clinique\": {\r\n        \"id\": 0\r\n      },\r\n      \"createUser\": \"string\",\r\n      \"creationDate\": \"2022-07-31T15:02:07.484Z\",\r\n      \"endDate\": \"2022-07-31T15:02:07.484Z\",\r\n      \"id\": 0,\r\n      \"number\": \"string\",\r\n      \"startDate\": \"2022-07-31T15:02:07.484Z\"\r\n    }\r\n  ],\r\n  \"seanceDays\": \"string\",\r\n  \"user\": {\r\n    \"id\": 1 \r\n  }\r\n}"
+					"raw": "{\r\n  \"active\": true,\r\n  \"affile\": \"string\",\r\n  \"desactivationDate\": \"2022-08-01T09:45:42.642Z\",\r\n  \"doit\": \"string\",\r\n  \"id\": 0,\r\n  \"numAffiliation\": \"string\",\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"id\": 0,\r\n      \"number\": \"string\",\r\n      \"startDate\": \"2022-08-01T09:45:42.642Z\"\r\n    }\r\n  ],\r\n  \"seanceDays\": \"string\",\r\n  \"user\": {\r\n    \"active\": true,\r\n    \"birthDate\": \"2022-08-01T09:45:42.642Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    },\r\n    \"firstName\": \"string\",\r\n    \"id\": 0,\r\n    \"lastName\": \"string\",\r\n    \"login\": \"string\",\r\n    \"password\": \"string\"\r\n  }\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/v1/users/patients",
@@ -410,7 +410,7 @@
 		},
 		{
 			"key": "TOKEN\n",
-			"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6YW5ub3ZpY2giLCJleHAiOjE2NTIyMjQzNTd9.Y2wEoDLV4zZ8sflcOI8TBcWflSh-TDKDQlYqfLVKqw6WqQEfK5v0OuIV5szePo1zdNZElYGRtjlQtV1-Dlcy7w"
+			"value":""
 		}
 	]
 }

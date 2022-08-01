@@ -45,12 +45,14 @@ public class UserController {
      */
     @PostMapping(path = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public User signUp(@RequestBody User user)
+    public ResponseEntity<?> signUp(@RequestBody User user)
 
     {
-        log.info("This is a test log signUp");
+        log.debug("Create new user");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userService.save(user);
+        user =  userService.save(user);
+        user.setPassword(null);//hide password for response
+        return new ResponseEntity(user, HttpStatus.CREATED);
     }
 
     /**
@@ -60,10 +62,10 @@ public class UserController {
      */
     @PostMapping(path = "/clinique", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Clinique postClinique(@RequestBody Clinique clinique)
+    public ResponseEntity<?> postClinique(@RequestBody Clinique clinique)
 
-    {
-        return cliniqueService.save(clinique);
+    {   log.debug("Create new clinique");
+        return new ResponseEntity(cliniqueService.save(clinique), HttpStatus.CREATED);
     }
 
     /**
@@ -74,9 +76,8 @@ public class UserController {
     @PostMapping(path = "/patients", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> postPatient(@RequestBody Patient patient){
-        log.info("This is a test log postPatient");
-         //patientService.save(patientDto);
-
+        log.debug("Create new patient");
+        patient.setUser( userService.save(patient.getUser()));
         return new ResponseEntity(patientService.save(patient), HttpStatus.CREATED);
     }
 }

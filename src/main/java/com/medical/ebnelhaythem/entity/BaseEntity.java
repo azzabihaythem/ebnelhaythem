@@ -19,11 +19,6 @@ import java.util.Date;
 public abstract class BaseEntity {
 
     @JsonProperty
-    @JoinColumn(name="clinique_id", nullable=false)
-    @ManyToOne
-    private Clinique clinique;
-
-    @JsonProperty
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
