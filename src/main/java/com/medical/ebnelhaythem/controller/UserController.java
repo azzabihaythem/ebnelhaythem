@@ -13,10 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 
 @RestController
@@ -79,5 +76,52 @@ public class UserController {
         log.debug("Create new patient");
         patient.setUser( userService.save(patient.getUser()));
         return new ResponseEntity(patientService.save(patient), HttpStatus.CREATED);
+    }
+
+
+    /**
+     * update patient (with user and prise en charge) endPoint
+     * @param patient
+     * @return
+     */
+    @PutMapping(path = "/patients", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updatePatient(@RequestBody Patient patient){
+        log.debug("update patient");
+        return new ResponseEntity(patientService.save(patient), HttpStatus.OK);
+    }
+
+    /**
+     * get patient  endPoint
+     * @param id Patient
+     * @return
+     */
+    @GetMapping(path = "/patients/{id}")
+    public ResponseEntity<?> getPatient(@PathVariable("id") Long id){
+        log.debug("get patient");
+        return new ResponseEntity(patientService.findById(id), HttpStatus.OK);
+    }
+
+    /**
+     * delete patient  endPoint
+     * @param id Patient
+     * @return
+     */
+    @DeleteMapping(path = "/patients/{id}")
+    public ResponseEntity<?> deletePatient(@PathVariable("id") Long id){
+        log.debug("delete patient");
+        patientService.deleteById(id);
+        return new ResponseEntity( HttpStatus.OK);
+    }
+
+    /**
+     * desactivate patient  endPoint
+     * @param id Patient
+     * @return
+     */
+    @PutMapping(path = "/desactivate/patients/{id}")
+    public ResponseEntity<?> desactivatePatient(@PathVariable("id") Long id){
+        log.debug("delete patient");
+        return new ResponseEntity(patientService.desactivatePatient(id), HttpStatus.OK);
     }
 }

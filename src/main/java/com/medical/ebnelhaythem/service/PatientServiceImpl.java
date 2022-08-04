@@ -1,11 +1,11 @@
 package com.medical.ebnelhaythem.service;
 
-import com.medical.ebnelhaythem.dto.PatientDto;
 import com.medical.ebnelhaythem.entity.Patient;
-import com.medical.ebnelhaythem.mapper.MainMapper;
 import com.medical.ebnelhaythem.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class PatientServiceImpl implements PatientService{
@@ -23,5 +23,26 @@ public class PatientServiceImpl implements PatientService{
 
         return patientRepository.save(patient);
 
+    }
+
+    @Override
+    public Optional<Patient> findById(Long id) {
+        return patientRepository.findById(id);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        patientRepository.deleteById(id);
+    }
+
+    @Override
+    public Patient desactivatePatient(Long id) {
+        Optional<Patient> patient = patientRepository.findById(id);
+       if(patient.isPresent()){
+           patient.get().setActive(false);
+
+       }
+        patientRepository.save(patient.get());
+        return null;
     }
 }
