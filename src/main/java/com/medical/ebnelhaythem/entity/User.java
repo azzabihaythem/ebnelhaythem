@@ -20,7 +20,7 @@ public class User extends AbstractPersistable<Long> {
 
 
 	@JsonProperty
-	@JoinColumn(name="clinique_id", nullable=false)
+	@JoinColumn(name="clinique_id")
 	@ManyToOne
 	private Clinique clinique;
 

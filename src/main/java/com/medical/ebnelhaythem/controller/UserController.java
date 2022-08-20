@@ -8,6 +8,7 @@ import com.medical.ebnelhaythem.dto.PatientDto;
 import com.medical.ebnelhaythem.service.CliniqueService;
 import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.UserService;
+import org.mapstruct.ap.shaded.freemarker.ext.beans._BeansAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,8 +17,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/v1/users")
+@CrossOrigin("*")
 public class UserController {
 
 
@@ -52,6 +56,16 @@ public class UserController {
         return new ResponseEntity(user, HttpStatus.CREATED);
     }
 
+    /**
+     *
+     * USER CRUD
+     */
+    @GetMapping(path = "/listuser")
+    public List<User> getAllUsers()
+        {
+        List<User> listUsers =userService.getAllUsers();
+        return (listUsers) ;
+    }
     /**
      * Create a new clinique
      * @param clinique
@@ -124,4 +138,5 @@ public class UserController {
         log.debug("delete patient");
         return new ResponseEntity(patientService.desactivatePatient(id), HttpStatus.OK);
     }
+
 }

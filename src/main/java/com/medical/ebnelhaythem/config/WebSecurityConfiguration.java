@@ -34,7 +34,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         "/configuration/ui",
         "/configuration/security",
         "/swagger-ui.html",
-        "/webjars/**"
+        "/webjars/**",
+           // "/v1/users/listuser"
         };
 
     public WebSecurityConfiguration(UserDetailsService userDetailsService

@@ -20,7 +20,7 @@ public class Clinique {
     @JsonProperty
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @JsonProperty
     @Column(updatable = false)
