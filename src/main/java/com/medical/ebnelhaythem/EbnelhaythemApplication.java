@@ -35,7 +35,8 @@ public class EbnelhaythemApplication {
 		logger.info("init *****************");
 		if(roleList.isEmpty()){
 			roleList.add(new Role(0,"admin"));
-			roleList.add(new Role(0,"patient"));
+			roleList.add(new Role(0,"superadmin"));
+			roleList.add(new Role(0,"employer"));
 			roleRepository.saveAll(roleList);
 		}
 
@@ -55,7 +56,7 @@ public class EbnelhaythemApplication {
 		public static void main(String[] args) {
 		SpringApplication.run(EbnelhaythemApplication.class, args);
 	}
-
+/*
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -72,6 +73,8 @@ public class EbnelhaythemApplication {
 		return new CorsFilter(urlBasedCorsConfigurationSource);
 	}
 
+
+ */
 
 
 

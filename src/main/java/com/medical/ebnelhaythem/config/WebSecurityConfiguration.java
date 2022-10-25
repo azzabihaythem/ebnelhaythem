@@ -35,7 +35,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         "/configuration/security",
         "/swagger-ui.html",
         "/webjars/**",
-           // "/v1/users/listuser"
+          // "/v1/users/listuser"
         };
 
     public WebSecurityConfiguration(UserDetailsService userDetailsService
@@ -55,6 +55,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                             .permitAll()
                         .antMatchers(HttpMethod.POST, "/v1/users/clinique")
                             .permitAll()
+                       // .antMatchers(HttpMethod.GET, "/v1/users/listuser")
+                           // .permitAll()
                         .anyRequest()
                             .authenticated()
                 .and()

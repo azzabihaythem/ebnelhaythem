@@ -45,6 +45,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain, Authentication authentication) {
                 String token = Jwts.builder()
                 .setSubject(((User) authentication.getPrincipal()).getUsername())
+                      //.claim("role", user.getRole().toString())
+                        //todo ligne to update
+                        .claim("role", "admin")
                 .setExpiration(new Date(System.currentTimeMillis() + 864_000_000))
                 .signWith(SignatureAlgorithm.HS512, Constants.SECRET_KEY_TO_GEN_JWTS.getBytes())//todo update the value of the SecretKeyToGenJWTs
                 .compact();
