@@ -37,6 +37,7 @@ public class EbnelhaythemApplication {
 			roleList.add(new Role(0,"admin"));
 			roleList.add(new Role(0,"superadmin"));
 			roleList.add(new Role(0,"employer"));
+			roleList.add(new Role(0,"patient"));
 			roleRepository.saveAll(roleList);
 		}
 

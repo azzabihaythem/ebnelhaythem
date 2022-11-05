@@ -2,6 +2,7 @@ package com.medical.ebnelhaythem.config;
 
 import com.medical.ebnelhaythem.filter.AuthenticationFilter;
 import com.medical.ebnelhaythem.filter.AuthorizationFilter;
+import com.medical.ebnelhaythem.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -24,7 +25,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
   //  private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+  private UserService userService;
     private UserDetailsService userDetailsService;
 
     private static final String[] AUTH_WHITELIST = {
@@ -38,10 +39,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
           // "/v1/users/listuser"
         };
 
-    public WebSecurityConfiguration(UserDetailsService userDetailsService
+    public WebSecurityConfiguration(UserDetailsService userDetailsService, UserService userService
                       //              ,BCryptPasswordEncoder bCryptPasswordEncoder
     ) {
      //   this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userService = userService ;
         this.userDetailsService = userDetailsService;
         }
 
@@ -60,7 +62,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .anyRequest()
                             .authenticated()
                 .and()
-                    .addFilter(new AuthenticationFilter(authenticationManager()))
+                    .addFilter(new AuthenticationFilter(authenticationManager(), userService))
                     .addFilter(new AuthorizationFilter(authenticationManager()))
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

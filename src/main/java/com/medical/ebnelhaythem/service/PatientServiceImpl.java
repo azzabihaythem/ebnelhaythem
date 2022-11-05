@@ -5,6 +5,7 @@ import com.medical.ebnelhaythem.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -17,6 +18,13 @@ public class PatientServiceImpl implements PatientService{
     //private MainMapper mainMapper;
 
     @Override
+    public List<Patient> getAllPatient() {
+        // TODO Auto-generated method stub
+        return (List<Patient>) patientRepository.findAll() ;
+    }
+
+
+    @Override
     public Patient save(Patient patient) {
 
        // Patient  patient =  patientRepository.save(MainMapper.INSTANCE.convertToEntity(patientDto));
@@ -24,6 +32,7 @@ public class PatientServiceImpl implements PatientService{
         return patientRepository.save(patient);
 
     }
+
 
     @Override
     public Optional<Patient> findById(Long id) {
