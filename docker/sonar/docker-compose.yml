@@ -21,15 +21,6 @@ services:
   postgres:
     image: postgres:12
     volumes:
-      - pg_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: sonar
-      POSTGRES_PASSWORD: sonar
-      POSTGRES_DB: sonarqube
-      PGDATA: pg_data:/var/lib/postgresql/data/pgdata
-
-volumes:
-  data:
   logs:
   extensions:
   pg_data:

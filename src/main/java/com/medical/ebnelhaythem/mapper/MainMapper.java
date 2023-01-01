@@ -16,11 +16,9 @@ public interface MainMapper {
     MainMapper INSTANCE  = Mappers.getMapper(MainMapper.class);
 
     @Mapping(target = "user.password" ,source="user.password",qualifiedByName = "setEmptyString")//should not expose password even if it is
-    @Mapping(target = "clinique" ,source="cliniqueId",qualifiedByName = "setClinique")//should not expose password even if it is
     Patient convertToEntity(PatientDto patientDto);
 
     @Mapping(target = "user.password" ,source="user.password",qualifiedByName = "setEmptyString")//should not expose password even if it is encrypted
-    @Mapping(target = "cliniqueId" ,source="clinique.id")
     PatientDto convertToDto(Patient patient);
 
 
