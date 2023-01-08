@@ -7,10 +7,12 @@ import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.UserService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequestMapping(value = "/v1")
@@ -73,6 +75,19 @@ public class PatientController {
     public ResponseEntity<?> getPatient(@PathVariable("id") Long id){
         log.debug("get patient");
         return new ResponseEntity(patientService.findById(id), HttpStatus.OK);
+    }
+
+    /**
+     *
+     * @param page
+     * @param numberOfElements
+     * @return list of patient by page
+     */
+    @GetMapping(path = "/patients/{page}/{numberOfElements}")
+    public ResponseEntity<?> getPagePatient(@PathVariable("page") int page,@PathVariable("numberOfElements") int numberOfElements){
+        log.debug("get patient");
+        Pageable pageablePageAndNumberOfElements = PageRequest.of(page, numberOfElements);
+        return new ResponseEntity(patientService.findAll(pageablePageAndNumberOfElements), HttpStatus.OK);
     }
 
     /**

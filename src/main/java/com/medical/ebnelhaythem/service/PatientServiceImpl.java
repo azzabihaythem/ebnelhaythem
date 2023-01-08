@@ -3,9 +3,11 @@ package com.medical.ebnelhaythem.service;
 import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.repository.PatientRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -45,5 +47,10 @@ public class PatientServiceImpl implements PatientService{
        }
         patientRepository.save(patient.get());
         return null;
+    }
+
+    @Override
+    public Page<Patient> findAll(Pageable pageable) {
+        return patientRepository.findAll(pageable);
     }
 }
