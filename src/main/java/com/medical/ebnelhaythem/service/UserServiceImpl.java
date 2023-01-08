@@ -2,15 +2,17 @@ package com.medical.ebnelhaythem.service;
 
 import com.medical.ebnelhaythem.entity.User;
 import com.medical.ebnelhaythem.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class UserServiceImpl implements UserService{
 
-    @Autowired
     private UserRepository userRepository;
 
     @Override

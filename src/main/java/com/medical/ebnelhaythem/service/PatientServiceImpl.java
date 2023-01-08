@@ -2,15 +2,16 @@ package com.medical.ebnelhaythem.service;
 
 import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.repository.PatientRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class PatientServiceImpl implements PatientService{
 
-    @Autowired
     private PatientRepository patientRepository;
 
     //@Autowired
