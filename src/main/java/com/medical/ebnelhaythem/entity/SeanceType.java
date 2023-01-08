@@ -2,10 +2,7 @@ package com.medical.ebnelhaythem.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table
