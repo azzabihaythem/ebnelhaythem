@@ -78,14 +78,14 @@ public class PatientController {
     }
 
     /**
-     *
+     * get payment by page
      * @param page
      * @param numberOfElements
      * @return list of patient by page
      */
     @GetMapping(path = "/patients/{page}/{numberOfElements}")
-    public ResponseEntity<?> getPagePatient(@PathVariable("page") int page,@PathVariable("numberOfElements") int numberOfElements){
-        log.debug("get patient");
+    public ResponseEntity<?> getPatientPage(@PathVariable("page") int page, @PathVariable("numberOfElements") int numberOfElements){
+        log.debug("get patient by page");
         Pageable pageablePageAndNumberOfElements = PageRequest.of(page, numberOfElements);
         return new ResponseEntity(patientService.findAll(pageablePageAndNumberOfElements), HttpStatus.OK);
     }
@@ -107,9 +107,9 @@ public class PatientController {
      * @param id Patient
      * @return
      */
-    @PutMapping(path = "/desactivate/patients/{id}")
-    public ResponseEntity<?> desactivatePatient(@PathVariable("id") Long id){
-        log.debug("delete patient");
-        return new ResponseEntity(patientService.desactivatePatient(id), HttpStatus.OK);
+    @PutMapping(path = "/patients/activate/{id}/{activateValue}")
+    public ResponseEntity<?> deactivatePatient(@PathVariable("id") Long id,@PathVariable("active") Boolean active){
+        log.debug("set  patient active");
+        return new ResponseEntity(patientService.setPatientActive(id,active), HttpStatus.OK);
     }
 }

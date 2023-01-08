@@ -39,11 +39,10 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient desactivatePatient(Long id) {
+    public Patient setPatientActive(Long id,Boolean active) {
         Optional<Patient> patient = patientRepository.findById(id);
        if(patient.isPresent()){
-           patient.get().setActive(false);
-
+           patient.get().setActive(active);
        }
         patientRepository.save(patient.get());
         return null;
