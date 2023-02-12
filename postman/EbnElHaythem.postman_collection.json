@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "db7e2315-aa9c-4454-99e8-d34a820183ae",
+		"name": "EbnElHaythem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1-Signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"active\": true,\r\n  \"birthDate\": \"2022-02-07T10:05:32.355Z\",\r\n  \"firstName\": \"haythem\",\r\n  \"lastName\": \"haythem\",\r\n  \"login\": \"{{login}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"clinique\": { \r\n    \"id\": 1\r\n  }\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2-LOGIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var headerValue = pm.response.headers.get(\"Authorization\");\r",
+							"pm.environment.set(\"authToken\",headerValue);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\":{{login}},\r\n    \"password\":\"{{password}}\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3-post patients",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"affile\": \"affile\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"doit\",\r\n  \"numAffiliation\": \"numAffiliation1001\",\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"id\": 0,\r\n      \"number\": \"string\",\r\n      \"startDate\": \"2022-08-01T09:45:42.642Z\"\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"patient1\",\r\n    \"login\": \"noLogin\",\r\n    \"password\": \"noPassword\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4-post Seance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"date\": \"2023-02-13T22:34:36.777Z\",\r\n  \"id\": 0,\r\n  \"patient\": {\r\n    \"id\": 1\r\n  },\r\n  \"seanceType\": {\r\n    \"id\": 1\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/seances",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"seances"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "login",
+			"value": "haythem"
+		},
+		{
+			"key": "password",
+			"value": "helloworld"
+		}
+	]
+}

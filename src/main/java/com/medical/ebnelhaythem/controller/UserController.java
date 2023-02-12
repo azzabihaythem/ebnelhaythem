@@ -1,26 +1,24 @@
 package com.medical.ebnelhaythem.controller;
 
-
 import com.medical.ebnelhaythem.entity.User;
 import com.medical.ebnelhaythem.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/v1")
+@Slf4j
 public class UserController {
 
     private UserService userService;
 
     private PasswordEncoder passwordEncoder;
-
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(UserController.class);
 
     /**
      * Create a new user
@@ -38,6 +36,5 @@ public class UserController {
         user.setPassword(null);//hide password for response
         return new ResponseEntity(user, HttpStatus.CREATED);
     }
-
 
 }

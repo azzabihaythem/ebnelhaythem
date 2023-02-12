@@ -15,7 +15,7 @@ import java.util.Date;
 public class PriseEnCharge extends BaseEntity {
 
     @JsonProperty
-    @Column(unique = true)
+    @Column(unique = true,nullable=false)
     private String number;
 
     @JsonProperty

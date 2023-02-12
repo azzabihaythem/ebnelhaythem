@@ -7,6 +7,8 @@ import java.util.Date;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = { "patient_id","date"})})
 public class Seance extends BaseEntity {

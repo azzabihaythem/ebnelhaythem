@@ -2,8 +2,12 @@ package com.medical.ebnelhaythem;
 
 import com.medical.ebnelhaythem.entity.Clinique;
 import com.medical.ebnelhaythem.entity.Role;
+import com.medical.ebnelhaythem.entity.Seance;
+import com.medical.ebnelhaythem.entity.SeanceType;
 import com.medical.ebnelhaythem.repository.CliniqueRepository;
 import com.medical.ebnelhaythem.repository.RoleRepository;
+import com.medical.ebnelhaythem.repository.SeanceRepository;
+import com.medical.ebnelhaythem.repository.SeanceTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,6 +27,9 @@ public class EbnelhaythemApplication {
 	@Autowired
 	CliniqueRepository cliniqueRepository;
 
+	@Autowired
+	SeanceTypeRepository seanceTypeRepository;
+
 	@PostConstruct
 	public void init() {
 
@@ -41,6 +48,10 @@ public class EbnelhaythemApplication {
 					"test","test","test",
 					"test","test","test","test",
 					"test"));
+		}
+
+		if(seanceTypeRepository.findAll().size()==0){
+			seanceTypeRepository.save(new SeanceType("SeanceClassic","1","1","1","1"));
 		}
 	}
 

@@ -13,7 +13,7 @@ http://localhost:8081/explorer/index.html#uri=/
 http://localhost:8080/v2/api-docs
 
 #swagger ui
-http://localhost:6868/swagger-ui.html
+http://localhost:8080/swagger-ui.html
 
 #run app 
 mvn spring-boot:run

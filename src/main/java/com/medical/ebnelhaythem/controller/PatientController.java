@@ -6,7 +6,7 @@ import com.medical.ebnelhaythem.service.CliniqueService;
 import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.UserService;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 @RestController
 @RequestMapping(value = "/v1")
 @AllArgsConstructor
+@Slf4j
 public class PatientController {
 
     private UserService userService;
@@ -24,8 +25,6 @@ public class PatientController {
     private PatientService patientService;
 
     private CliniqueService cliniqueService;
-
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(PatientController.class);
 
     /**
      * Create a new clinique
