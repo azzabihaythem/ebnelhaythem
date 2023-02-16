@@ -1,5 +1,7 @@
 package com.medical.ebnelhaythem.service;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.medical.ebnelhaythem.entity.DAYS_OF_THE_WEEK;
 import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.entity.Seance;
@@ -9,7 +11,10 @@ import com.medical.ebnelhaythem.repository.SeanceTypeRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -22,6 +27,8 @@ public class SeanceServiceImpl implements SeanceService{
     private SeanceTypeRepository seanceTypeRepository;
 
     private PatientService patientService;
+
+    private FacturePdfBuilder facturePdfBuilder;
 
     @Override
     public Seance save(Seance seance) {
@@ -80,7 +87,12 @@ public class SeanceServiceImpl implements SeanceService{
 
     }
 
+    @Override
+    public ByteArrayInputStream getFacturePatient(List<String> patientIds, LocalDate startDate, LocalDate endDate) throws DocumentException {
 
+        //todo remplace by the true value of listseance ; findAll is only for test
+         return facturePdfBuilder.doPdf(seanceRepository.findAll());
+    }
 
 
 }
