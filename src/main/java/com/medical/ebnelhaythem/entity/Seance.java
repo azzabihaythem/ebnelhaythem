@@ -3,7 +3,7 @@ package com.medical.ebnelhaythem.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -20,7 +20,7 @@ public class Seance extends BaseEntity {
 
     @JsonProperty
     @Column
-    private Date date;
+    private LocalDate date;
 
     @JsonProperty
     @ManyToOne
