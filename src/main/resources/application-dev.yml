@@ -13,3 +13,6 @@ spring:
     #password: test
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+jwt:
+  secret: SecretKeyToGenJWTs
+  expirationDateInMs: 864000000

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import java.util.List;
 @Table
 @Data
 public class Facture extends BaseEntity {
+
+
 
     @JsonProperty
     @Column
@@ -24,9 +27,10 @@ public class Facture extends BaseEntity {
     @OneToMany
     private List<Seance> seances;
 
+    //date should be exactly last day in the month
     @JsonProperty
     @Column
-    private Date date;
+    private LocalDate date;
 
     @JsonProperty
     @OneToMany

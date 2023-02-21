@@ -2,20 +2,23 @@ package com.medical.ebnelhaythem.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity
-@Table
 @Data
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "clinique_id","number"})})
 public class PriseEnCharge extends BaseEntity {
 
     @JsonProperty
-    @Column(unique = true,nullable=false)
+    @JoinColumn(name="clinique_id", nullable=false)
+    @ManyToOne
+    private Clinique clinique;
+
+
+    @JsonProperty
+    @Column
     private String number;
 
     @JsonProperty

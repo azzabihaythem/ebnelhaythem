@@ -1,33 +1,40 @@
 package com.medical.ebnelhaythem.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.medical.ebnelhaythem.utils.Constants;
+import com.medical.ebnelhaythem.config.JwtYmlPropertiesConfig;
+import com.medical.ebnelhaythem.service.UserService;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import io.jsonwebtoken.Jwts;
-
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+
+        private UserService userService;
+
+        private JwtYmlPropertiesConfig ymlPropertiesConfig;
+
         private AuthenticationManager authenticationManager;
-        public AuthenticationFilter(AuthenticationManager authenticationManager) {
+
+        public AuthenticationFilter(AuthenticationManager authenticationManager, UserService userService,
+                                    JwtYmlPropertiesConfig ymlPropertiesConfig) {
+                this.userService = userService ;
                 this.authenticationManager = authenticationManager;
+                this.ymlPropertiesConfig = ymlPropertiesConfig;
+
                 setFilterProcessesUrl("/login");
+
         }
 
 
@@ -45,14 +52,22 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain, Authentication authentication) {
                 String token = Jwts.builder()
                 .setSubject(((User) authentication.getPrincipal()).getUsername())
-                .setExpiration(new Date(System.currentTimeMillis() + 864_000_000))
-                .signWith(SignatureAlgorithm.HS512, Constants.SECRET_KEY_TO_GEN_JWTS.getBytes())//todo update the value of the SecretKeyToGenJWTs
+                      //.claim("role", user.getRole().toString())
+                        //todo ligne to update
+                        .claim("role", userService.findByLogin(((User) authentication.getPrincipal()).getUsername()).getRoles().get(0).getRole())
+                        .claim("cliniqueId", userService.findByLogin(((User) authentication.getPrincipal()).getUsername()).getClinique().getId())
+                .setExpiration(new Date(System.currentTimeMillis() + ymlPropertiesConfig.getExpirationDateInMs()))
+                .signWith(SignatureAlgorithm.HS512, ymlPropertiesConfig.getSecret().getBytes())
                 .compact();
 
 
                 response.addHeader("Authorization","Bearer " + token);
 
                 }
+
+
+
+
 /*
 https://blog.softtek.com/en/token-based-api-authentication-with-spring-and-jwt
         private String getJWTToken(String username) {

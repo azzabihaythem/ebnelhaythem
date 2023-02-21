@@ -2,6 +2,7 @@ package com.medical.ebnelhaythem.controller;
 
 import com.itextpdf.text.DocumentException;
 import com.medical.ebnelhaythem.entity.Seance;
+import com.medical.ebnelhaythem.service.FactureService;
 import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.SeanceService;
 import lombok.AllArgsConstructor;
@@ -13,11 +14,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
 import java.util.List;
+
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
 
 @RestController
@@ -29,6 +31,8 @@ public class SeanceController {
     private SeanceService seanceService;
 
     private PatientService patientService;
+
+    private FactureService factureService;
 
 
     /**
@@ -42,6 +46,7 @@ public class SeanceController {
 
     {
         log.debug("Create new seance");
+
         return new ResponseEntity(seanceService.save(seance), HttpStatus.CREATED);
     }
 
@@ -73,28 +78,34 @@ public class SeanceController {
 
     /**
      *
+     * @param response
      * @param patientIds
-     * @param startDate
-     * @param endDate
+     * @param month
+     * @param year
      * @return
+     * @throws DocumentException
      */
-    @PostMapping(path = "/list/factures/startDate/{startDate}/endDate/{endDate}")
+    @PostMapping(path = "/list/factures/month/{month}/year/{year}")
     public ResponseEntity<InputStreamResource>  getFacturePatient(HttpServletResponse response,
                                                                   @RequestBody List<String> patientIds,
-                                                                  @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
-                                                                  @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate
-    ) throws DocumentException {
-        log.debug("getFacturePatient");
-        log.debug("patientId is "+patientIds.size());
-        log.debug("startDate is "+startDate);
-        log.debug("endDate is "+endDate);
+                                                                  @RequestHeader("Authorization") String token ,
+                                                                  @PathVariable Integer month,
+                                                                  @PathVariable Integer year) throws DocumentException {
+
 
         response.setContentType("application/pdf");
 
-        ByteArrayInputStream bis = seanceService.getFacturePatient(patientIds,startDate,endDate);
-        log.debug("endDate is "+endDate);
+        LocalDate startDate = LocalDate.of(year, month, 1);
+
+        LocalDate endDate = startDate.with(lastDayOfMonth());
+
+        ByteArrayInputStream bis = factureService.getFacturePatient(patientIds,startDate,endDate);
+
         var headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+
+        headers.add("Content-Disposition", "inline; filename=FacturesParPatient"
+                +month+"/"+year+".pdf");
+
         return ResponseEntity
                 .ok()
                 .headers(headers)

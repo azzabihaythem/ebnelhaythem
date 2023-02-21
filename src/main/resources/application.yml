@@ -15,6 +15,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: ebnelhaythem
+jwt:
+  secret: SecretKeyToGenJWTs
+  expirationDateInMs: 864000000
 logstash:
   host: localhost
   port: 5000

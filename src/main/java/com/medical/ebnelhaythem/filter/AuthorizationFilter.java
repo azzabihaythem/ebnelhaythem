@@ -1,6 +1,6 @@
 package com.medical.ebnelhaythem.filter;
 
-import com.medical.ebnelhaythem.utils.Constants;
+import com.medical.ebnelhaythem.config.JwtYmlPropertiesConfig;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,9 +14,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
-    public AuthorizationFilter(AuthenticationManager authenticationManager) {
+    private JwtYmlPropertiesConfig ymlPropertiesConfig;
+
+    public AuthorizationFilter(AuthenticationManager authenticationManager, JwtYmlPropertiesConfig ymlPropertiesConfig) {
         super(authenticationManager);
+        this.ymlPropertiesConfig = ymlPropertiesConfig;
+
         }
+
 
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws IOException, ServletException {
@@ -34,7 +39,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         if(token != null) {
-            String user = Jwts.parser().setSigningKey(Constants.SECRET_KEY_TO_GEN_JWTS.getBytes())
+            String user = Jwts.parser().setSigningKey(ymlPropertiesConfig.getSecret().getBytes())
             .parseClaimsJws(token.replace("Bearer",""))
             .getBody()
             .getSubject();

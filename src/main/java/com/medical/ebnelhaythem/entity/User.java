@@ -59,7 +59,7 @@ public class User extends AbstractPersistable<Long> {
 	private Date updateDate;
 
 	@JsonProperty
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.DETACH,fetch=FetchType.EAGER)
 	@JoinTable(name="user_roles",
 			joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
 			inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}

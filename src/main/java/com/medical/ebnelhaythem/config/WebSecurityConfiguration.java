@@ -2,12 +2,11 @@ package com.medical.ebnelhaythem.config;
 
 import com.medical.ebnelhaythem.filter.AuthenticationFilter;
 import com.medical.ebnelhaythem.filter.AuthorizationFilter;
+import com.medical.ebnelhaythem.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -24,8 +23,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
   //  private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    private UserService userService;
     private UserDetailsService userDetailsService;
+    private JwtYmlPropertiesConfig ymlPropertiesConfig;
 
     private static final String[] AUTH_WHITELIST = {
         "/v2/api-docs",
@@ -37,11 +37,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         "/webjars/**"
         };
 
-    public WebSecurityConfiguration(UserDetailsService userDetailsService
+    public WebSecurityConfiguration(UserDetailsService userDetailsService, UserService userService,
+                                    JwtYmlPropertiesConfig ymlPropertiesConfig
                       //              ,BCryptPasswordEncoder bCryptPasswordEncoder
     ) {
      //   this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userService = userService ;
         this.userDetailsService = userDetailsService;
+        this.ymlPropertiesConfig = ymlPropertiesConfig;
         }
 
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -57,8 +60,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .anyRequest()
                             .authenticated()
                 .and()
-                    .addFilter(new AuthenticationFilter(authenticationManager()))
-                    .addFilter(new AuthorizationFilter(authenticationManager()))
+                    .addFilter(new AuthenticationFilter(authenticationManager(), userService,ymlPropertiesConfig))
+                    .addFilter(new AuthorizationFilter(authenticationManager(),ymlPropertiesConfig))
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         }
