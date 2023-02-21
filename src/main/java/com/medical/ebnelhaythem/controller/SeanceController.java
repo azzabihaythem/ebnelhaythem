@@ -5,6 +5,7 @@ import com.medical.ebnelhaythem.entity.Seance;
 import com.medical.ebnelhaythem.service.FactureService;
 import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.SeanceService;
+import com.medical.ebnelhaythem.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
@@ -33,6 +34,8 @@ public class SeanceController {
     private PatientService patientService;
 
     private FactureService factureService;
+
+    private JwtUtil jwtUtilil;
 
 
     /**
@@ -95,6 +98,7 @@ public class SeanceController {
 
         response.setContentType("application/pdf");
 
+        log.info("jwtUtilil.getCliniqueId(token) = "+jwtUtilil.getCliniqueId(token));
         LocalDate startDate = LocalDate.of(year, month, 1);
 
         LocalDate endDate = startDate.with(lastDayOfMonth());
