@@ -6,4 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(exported = false)
 public interface CliniqueRepository extends JpaRepository<Clinique, Long> {
+
+    Clinique findById(long id);
 }

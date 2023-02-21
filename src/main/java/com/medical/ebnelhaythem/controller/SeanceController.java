@@ -1,6 +1,7 @@
 package com.medical.ebnelhaythem.controller;
 
 import com.itextpdf.text.DocumentException;
+import com.medical.ebnelhaythem.entity.Facture;
 import com.medical.ebnelhaythem.entity.Seance;
 import com.medical.ebnelhaythem.service.FactureService;
 import com.medical.ebnelhaythem.service.PatientService;
@@ -98,12 +99,13 @@ public class SeanceController {
 
         response.setContentType("application/pdf");
 
-        log.info("jwtUtilil.getCliniqueId(token) = "+jwtUtilil.getCliniqueId(token));
         LocalDate startDate = LocalDate.of(year, month, 1);
 
         LocalDate endDate = startDate.with(lastDayOfMonth());
 
-        ByteArrayInputStream bis = factureService.getFacturePatient(patientIds,startDate,endDate);
+        Facture facture = factureService.createPatientFacture(patientIds.get(0),startDate,endDate,jwtUtilil.getCliniqueId(token));
+
+        ByteArrayInputStream bis = factureService.getFacturePatient(facture);
 
         var headers = new HttpHeaders();
 

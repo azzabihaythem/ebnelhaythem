@@ -89,7 +89,7 @@ public class SeanceServiceImpl implements SeanceService{
     public List<Seance> findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(String patientId,
                                                                                    LocalDate startDate,
                                                                                    LocalDate endDate) {
-        return seanceRepository.findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(patientId,startDate,endDate);
+        return seanceRepository.findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(Long.parseLong(patientId),startDate,endDate);
     }
 
 

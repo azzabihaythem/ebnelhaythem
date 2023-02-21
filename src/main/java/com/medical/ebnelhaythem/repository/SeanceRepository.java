@@ -12,7 +12,7 @@ import java.util.List;
 @RepositoryRestResource(exported = false)
 public interface SeanceRepository extends JpaRepository<Seance, Long> {
 
-    public List<Seance> findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(String patientId,
+    public List<Seance> findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(long patientId,
                                                                                           LocalDate startDate,
                                                                                           LocalDate endDate);
 }

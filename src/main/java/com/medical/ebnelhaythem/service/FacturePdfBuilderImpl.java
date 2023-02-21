@@ -24,18 +24,18 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             Font.NORMAL);
 
     @Override
-    public ByteArrayInputStream doPdf(List<Seance> seanceList) throws DocumentException {
+    public ByteArrayInputStream doPdf(Facture facture) throws DocumentException {
 
-        if (seanceList.size() > 0) {
+        if (facture.getSeances().size() > 0) {
             Paragraph preface;
             //todo complete this information and get them out of this class
-            Clinique clinique = seanceList.get(0).getPatient().getUser().getClinique();
-            Patient patient = seanceList.get(0).getPatient();
-            User user = seanceList.get(0).getPatient().getUser();
-            Facture facture =  new Facture();
-            facture.setId(1);//todo delete this line, value will be generated
-            facture.setNumber("00001");
-            facture.setSeances(seanceList);
+            Clinique clinique = facture.getSeances().get(0).getPatient().getUser().getClinique();
+            Patient patient = facture.getSeances().get(0).getPatient();
+            User user = facture.getSeances().get(0).getPatient().getUser();
+            // Facture facture =  new Facture();
+            //facture.setId(1);//todo delete this line, value will be generated
+            //facture.setNumber("00001");
+            //facture.setSeances(seanceList);
 
 
 
@@ -142,13 +142,13 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 
-            preface = new Paragraph(new Phrase("     Nombre de Séance      : " + seanceList.size(), normal));
+            preface = new Paragraph(new Phrase("     Nombre de Séance      : " + facture.getSeances().size(), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 
             Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.MONTH, seanceList.get(0).getDate().getMonth().getValue());
-            cal.set(Calendar.YEAR, seanceList.get(0).getDate().getYear() + 1900);
+            cal.set(Calendar.MONTH, facture.getSeances().get(0).getDate().getMonth().getValue());
+            cal.set(Calendar.YEAR, facture.getSeances().get(0).getDate().getYear() + 1900);
 
             cal.set(Calendar.DAY_OF_MONTH, 1);// This is necessary to get proper results
             cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
@@ -215,8 +215,8 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             Long totalEXONERE = 0L;
             Long totalMSP = 0L;
             Long totalGlobal = 0L;
-            if (seanceList.size() > 0) {
-                for (Seance aSeance : seanceList) {
+            if (facture.getSeances().size() > 0) {
+                for (Seance aSeance : facture.getSeances()) {
 
                     if (i == 1) {
                         cell.setHorizontalAlignment(Element.ALIGN_CENTER);

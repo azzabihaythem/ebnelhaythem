@@ -201,6 +201,43 @@
 			"response": []
 		},
 		{
+			"name": "5-post Seances By periode for listpatient 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  \"1\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/list/seances/typeSeanceId/1/startDate/01-04-2023/endDate/30-04-2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"list",
+						"seances",
+						"typeSeanceId",
+						"1",
+						"startDate",
+						"01-04-2023",
+						"endDate",
+						"30-04-2023"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "6-Get Factures By periode for list of patients",
 			"request": {
 				"method": "POST",
@@ -228,6 +265,41 @@
 						"factures",
 						"month",
 						"3",
+						"year",
+						"2023"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6-Get Factures By periode for list of patients 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  \"1\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/list/factures/month/4/year/2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"list",
+						"factures",
+						"month",
+						"4",
 						"year",
 						"2023"
 					]

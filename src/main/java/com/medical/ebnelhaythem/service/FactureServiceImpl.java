@@ -2,7 +2,9 @@ package com.medical.ebnelhaythem.service;
 
 import com.itextpdf.text.DocumentException;
 import com.medical.ebnelhaythem.entity.Facture;
+import com.medical.ebnelhaythem.entity.FactureLastNumber;
 import com.medical.ebnelhaythem.entity.Seance;
+import com.medical.ebnelhaythem.repository.FactureLastNumberRepository;
 import com.medical.ebnelhaythem.repository.FactureRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
@@ -22,21 +23,59 @@ public class FactureServiceImpl implements FactureService{
 
     private FacturePdfBuilder facturePdfBuilder;
 
+    private CliniqueService cliniqueService;
+
     private SeanceService seanceService;
+
+    private PatientService patientService;
 
     private FactureRepository factureRepository;
 
+    private FactureLastNumberRepository factureLastNumberRepository;
+
 
     @Override
-    public ByteArrayInputStream getFacturePatient(List<String> patientIds, LocalDate startDate, LocalDate endDate)
+    public ByteArrayInputStream getFacturePatient(Facture  facture) throws DocumentException {
+
+        return facturePdfBuilder.doPdf(facture);
+    }
+
+    @Override
+    public Facture  createPatientFacture(String patientId,
+                                         LocalDate startDate,
+                                         LocalDate endDate,
+                                         long cliniqueId)
             throws DocumentException {
 
-        //todo remplace by the true value of listseance ; findAll is only for test
+        Facture  facture = factureRepository.findByPatientIdAndDate(Long.parseLong(patientId),endDate);
+        List<Seance> seanceList = seanceService.
+                findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(patientId,startDate,endDate);
+        if(facture==null){
+            facture = new Facture();
+            //todo add test if patient doesn't exist
+            facture.setPatient(patientService.findById(Long.parseLong(patientId)).get());
+            facture.setDate(endDate);
+            facture.setNumber(getLastFactureNumberByCliniqueId(cliniqueId));
+        }
+        facture.setSeances(seanceList);
 
-        List<Facture> factureList = new ArrayList<>();
-
-        return facturePdfBuilder.doPdf(seanceService.findAll());
+        return factureRepository.save(facture);
     }
+
+    private String getLastFactureNumberByCliniqueId(long cliniqueId) {
+        String lastFactureNumberByCliniqueId = "1";
+        FactureLastNumber factureLastNumber =  factureLastNumberRepository.findByCliniqueId(cliniqueId);
+        if(factureLastNumber!=null){
+            lastFactureNumberByCliniqueId = (Long.parseLong(factureLastNumber.getNumber()) + 1)+"";
+            factureLastNumber.setNumber(lastFactureNumberByCliniqueId);
+            factureLastNumberRepository.save(factureLastNumber);
+        }else {
+             factureLastNumber = new FactureLastNumber(cliniqueService.findByCliniqueId(cliniqueId),"1");
+            factureLastNumberRepository.save(factureLastNumber);
+        }
+        return lastFactureNumberByCliniqueId;
+    }
+
 
     @Override
     public Facture save(Facture facture) {

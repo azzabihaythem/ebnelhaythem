@@ -15,4 +15,9 @@ public class CliniqueServiceImpl implements  CliniqueService {
         return cliniqueRepository.save(clinique);
     }
 
+    @Override
+    public Clinique findByCliniqueId(long clinique) {
+        return cliniqueRepository.findById(clinique);
+    }
+
 }
