@@ -113,7 +113,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             preface = new Paragraph(new Phrase("     Doit                         : " +patient.getDoit(), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
-            preface = new Paragraph(new Phrase("     Affil°                        : " + patient.getAffile(), normal));
+            preface = new Paragraph(new Phrase("     Affil°                        : " + patient.getNumAffiliation(), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
             try {
@@ -139,7 +139,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
            // sdf.applyPattern(NEW_FORMAT);
 
 
-            preface = new Paragraph(new Phrase("     N°Affilation             : " + patient.getAffile(), normal));
+            preface = new Paragraph(new Phrase("     N°Affilation             : " + patient.getNumAffiliation(), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 

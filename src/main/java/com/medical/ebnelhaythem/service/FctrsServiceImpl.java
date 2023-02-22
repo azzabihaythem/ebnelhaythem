@@ -209,7 +209,6 @@ public class FctrsServiceImpl implements FctrsService {
 
 		
 		borderauLine = borderauLine
-				+ borderauLine
 				+ bordereau.getClinique().getCodeBureauxRegional();// code
 																			// bureau
 																			// r�gional
@@ -234,6 +233,7 @@ public class FctrsServiceImpl implements FctrsService {
 		
 		
 		//added 2017    if F0  NOTRE PATIENT
+			//treate real case
 		borderauLine = borderauLine + "F0";
 		
 		
@@ -267,10 +267,6 @@ public class FctrsServiceImpl implements FctrsService {
 		}
 
 		borderauLine = borderauLine + numAff1 + numAff2;
-
-		// String factureNumber = factureService.findByMonthAndYear(
-		// date.getMonth() + "", date.getYear() + "").size()
-		// + "";
 
 
 		String seanceNumber = fact.getSeances().size() + "";
@@ -309,31 +305,31 @@ public class FctrsServiceImpl implements FctrsService {
 		System.out.println("datefin  == " + datefin);
 
 		//todo verify format
-		String DateDebutDay = datedebut + "";
-		while (DateDebutDay.length() < 2) {
-			DateDebutDay = "0" + DateDebutDay;
+		String dateDebutDay = datedebut.getDayOfMonth() + "";
+		while (dateDebutDay.length() < 2) {
+			dateDebutDay = "0" + dateDebutDay;
 		}
-		System.out.println("DateDebutDay  == " + DateDebutDay);
-		String DateDebutMonth = (datedebut.getMonth().getValue() + 1) + "";
-		while (DateDebutMonth.length() < 2) {
-			DateDebutMonth = "0" + DateDebutMonth;
+		System.out.println("dateDebutDay  == " + dateDebutDay);
+		String dateDebutMonth = (datedebut.getMonth().getValue() + 1) + "";
+		while (dateDebutMonth.length() < 2) {
+			dateDebutMonth = "0" + dateDebutMonth;
 		}
 
-		String DateDebut = bordereau.getDate().getYear() + DateDebutMonth + DateDebutDay;
+		String DateDebut = bordereau.getDate().getYear() + dateDebutMonth + dateDebutDay;
 		borderauLine = borderauLine + DateDebut;
 		//todo verify format
-		String DateFinDay = datefin+ "";
-		while (DateFinDay.length() < 2) {
-			DateFinDay = "0" + DateFinDay;
+		String dateFinDay = datefin.getDayOfMonth()+ "";
+		while (dateFinDay.length() < 2) {
+			dateFinDay = "0" + dateFinDay;
 		}
-		System.out.println("DateFinDay  == " + DateFinDay);
-		String DateFinMonth = (datefin.getMonth().getValue() + 1) + "";
-		while (DateFinMonth.length() < 2) {
-			DateFinMonth = "0" + DateFinMonth;
+		System.out.println("dateFinDay  == " + dateFinDay);
+		String dateFinMonth = (datefin.getMonth().getValue() + 1) + "";
+		while (dateFinMonth.length() < 2) {
+			dateFinMonth = "0" + dateFinMonth;
 		}
 
-		String DateFin = bordereau.getDate().getYear() + DateFinMonth + DateFinDay;
-		borderauLine = borderauLine + DateFin;
+		String dateFin = bordereau.getDate().getYear() + dateFinMonth + dateFinDay;
+		borderauLine = borderauLine + dateFin;
 
 		final String OLD_FORMAT = "yyyy-MM-dd";
 		final String NEW_FORMAT = "yyyyMMdd";

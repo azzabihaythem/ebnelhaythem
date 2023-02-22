@@ -47,4 +47,8 @@ public class Patient extends BaseEntity{
     @Column
     private boolean active;
 
+    @JsonProperty
+    @Column
+    private boolean localPatient;
+
 }
