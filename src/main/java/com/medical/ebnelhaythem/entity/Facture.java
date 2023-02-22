@@ -2,11 +2,10 @@ package com.medical.ebnelhaythem.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+import java.util.SortedSet;
 
 @Entity
 @Table
@@ -25,7 +24,8 @@ public class Facture extends BaseEntity {
 
     @JsonProperty
     @OneToMany
-    private List<Seance> seances;
+    @OrderBy("Date DESC")
+    private SortedSet<Seance> seances;
 
     //date should be exactly last day in the month
     @JsonProperty

@@ -150,7 +150,7 @@ public class FrenchNumberToWords {
 
   public static String convert(long number) {
     // 0 � 999 999 999 999
-    if (number == 0) { return "z�ro"; }
+    if (number == 0) { return "zéro"; }
 
     String snumber = Long.toString(number);
 

@@ -5,6 +5,7 @@ import com.medical.ebnelhaythem.entity.Seance;
 import com.medical.ebnelhaythem.entity.SeanceType;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.SortedSet;
 
 public interface SeanceService {
 
@@ -18,7 +19,7 @@ public interface SeanceService {
 
      public  List<Seance> findAll();
 
-     public List<Seance> findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(String patientId,
-                                                                                    LocalDate startDate,
-                                                                                    LocalDate endDate);
+     public SortedSet<Seance> findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(String patientId,
+                                                                                         LocalDate startDate,
+                                                                                         LocalDate endDate);
 }

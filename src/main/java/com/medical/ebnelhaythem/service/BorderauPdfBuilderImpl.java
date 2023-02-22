@@ -202,10 +202,10 @@ public class BorderauPdfBuilderImpl implements BorderauPdfBuilder{
 			for (Facture afact : bordereau.getFactures()) {
 				int seanceNumber = afact.getSeances().size();
 				seance = seance+Long.parseLong(seanceNumber+"");
-				//todo verify id seaance number >0
-				MTHTAXE =Long.parseLong(afact.getSeances().get(0).getSeanceType().getMTHTAXE())*seanceNumber;
-				MTTVA = Long.parseLong(afact.getSeances().get(0).getSeanceType().getMTTVA())*seanceNumber;
-				EXONERE =  Long.parseLong(afact.getSeances().get(0).getSeanceType().getEXONERE())*seanceNumber;
+
+				MTHTAXE =Long.parseLong(afact.getSeances().first().getSeanceType().getMTHTAXE())*seanceNumber;
+				MTTVA = Long.parseLong(afact.getSeances().first().getSeanceType().getMTTVA())*seanceNumber;
+				EXONERE =  Long.parseLong(afact.getSeances().first().getSeanceType().getEXONERE())*seanceNumber;
 //				MSP = Long.parseLong(afact.getMsp());
 				ttc=MTHTAXE+MTTVA; //todo verify this ligne
 				totalGlobal=totalGlobal+ttc;

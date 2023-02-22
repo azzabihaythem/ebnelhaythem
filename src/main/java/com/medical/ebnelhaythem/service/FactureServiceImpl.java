@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
@@ -48,7 +49,7 @@ public class FactureServiceImpl implements FactureService{
                                          long cliniqueId) {
 
         Facture  facture = factureRepository.findByPatientIdAndDate(Long.parseLong(patientId),endDate);
-        List<Seance> seanceList = seanceService.
+        SortedSet<Seance> seanceList = seanceService.
                 findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(patientId,startDate,endDate);
         if(facture==null){
             facture = new Facture();
@@ -108,7 +109,7 @@ public class FactureServiceImpl implements FactureService{
 
         LocalDate endDate = startDate.with(lastDayOfMonth());
 
-        List<Seance> patientSeanceList = seanceService.findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(
+        SortedSet<Seance> patientSeanceList = seanceService.findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(
                 patientId,
                 startDate,
                 endDate);
@@ -123,7 +124,8 @@ public class FactureServiceImpl implements FactureService{
         if( patientFactureList.size() == 1){
             facture = patientFactureList.get(0);
         }else if(patientSeanceList.size()>0){
-           Facture lastOne = factureRepository.findTop1ByPatient_User_CliniqueIdOrderByIdDesc(patientSeanceList.get(0).getPatient()
+           Facture lastOne = factureRepository.findTop1ByPatient_User_CliniqueIdOrderByIdDesc(patientSeanceList.stream()
+                   .findFirst().get().getPatient()
                     .getUser().getClinique().getId());
            if(lastOne != null){
                factureNumber = (Long.parseLong(lastOne.getNumber())+1)+"";

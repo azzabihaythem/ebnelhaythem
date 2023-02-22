@@ -94,7 +94,7 @@ public class FctrsServiceImpl implements FctrsService {
 
 
 		//todo nedd to verify is not null
-		SeanceType seanceType = bordereau.getFactures().get(0).getSeances().get(0).getSeanceType();
+		SeanceType seanceType = bordereau.getFactures().get(0).getSeances().first().getSeanceType();
 
 		//todo remplacer par calcul de prix de seance et pas total individuel
 		Long prixSeance = Long.parseLong(seanceType.getEXONERE())
@@ -281,7 +281,7 @@ public class FctrsServiceImpl implements FctrsService {
 
 
 		//todo nedd to verify is not null
-		SeanceType seanceType = bordereau.getFactures().get(0).getSeances().get(0).getSeanceType();
+		SeanceType seanceType = bordereau.getFactures().get(0).getSeances().first().getSeanceType();
 		//todo fait le calcule reel de chaque seance
 		Long prixttc = Long.parseLong(seanceType.getEXONERE())
 				+ Long.parseLong(seanceType.getMSP()) + Long.parseLong(seanceType.getMTHTAXE())
@@ -298,10 +298,10 @@ public class FctrsServiceImpl implements FctrsService {
 		borderauLine = borderauLine + ppt;
 
 		//todo sort
-		LocalDate datedebut = fact.getSeances().get(0).getDate();
+		LocalDate datedebut = fact.getSeances().first().getDate();
 
 		System.out.println("datedebut  == " + datedebut);
-		LocalDate datefin = fact.getSeances().get(fact.getSeances().size() - 1).getDate();
+		LocalDate datefin = fact.getSeances().last().getDate();
 		System.out.println("datefin  == " + datefin);
 
 		//todo verify format

@@ -37,9 +37,9 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
         if (facture.getSeances().size() > 0) {
             Paragraph preface;
             //todo complete this information and get them out of this class
-            Clinique clinique = facture.getSeances().get(0).getPatient().getUser().getClinique();
-            Patient patient = facture.getSeances().get(0).getPatient();
-            User user = facture.getSeances().get(0).getPatient().getUser();
+            Clinique clinique = facture.getSeances().first().getPatient().getUser().getClinique();
+            Patient patient = facture.getSeances().first().getPatient();
+            User user = facture.getSeances().first().getPatient().getUser();
             // Facture facture =  new Facture();
             //facture.setId(1);//todo delete this line, value will be generated
             //facture.setNumber("00001");
@@ -113,7 +113,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             preface = new Paragraph(new Phrase("     Doit                         : " +patient.getDoit(), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
-            preface = new Paragraph(new Phrase("     Affil°                        : " + patient.getNumAffiliation(), normal));
+            preface = new Paragraph(new Phrase("     Affilé                        : " + patient.getAffile(), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
             try {
@@ -153,8 +153,8 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             doc.add(preface);
 
             Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.MONTH, facture.getSeances().get(0).getDate().getMonth().getValue());
-            cal.set(Calendar.YEAR, facture.getSeances().get(0).getDate().getYear() + 1900);
+            cal.set(Calendar.MONTH, facture.getSeances().first().getDate().getMonth().getValue());
+            cal.set(Calendar.YEAR, facture.getSeances().first().getDate().getYear() + 1900);
 
             cal.set(Calendar.DAY_OF_MONTH, 1);// This is necessary to get proper results
             cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
@@ -354,6 +354,42 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             }
 
             doc.add(table);
+
+
+
+
+            String 	str ;
+            str = totalEXONERE + "";
+            str = new StringBuilder(str).insert(str.length() - 3, ",")
+                    .toString();
+            preface = new Paragraph(new Phrase("Montant exonéré :"+ facture.getSeances().first().getSeanceType().getEXONERE()+" D x "+facture.getSeances().size()+" = "+str +" D", normal));
+            preface.setAlignment(Element.ALIGN_LEFT);
+            doc.add(preface);
+
+
+            str = totalMTHTAXE + "";
+            str = new StringBuilder(str).insert(str.length() - 3, ",")
+                    .toString();
+            preface = new Paragraph(new Phrase("Montant H T       : "+facture.getSeances().first().getSeanceType().getMTHTAXE()+" D  x "+facture.getSeances().size()+" = "+str +" D", normal));
+            preface.setAlignment(Element.ALIGN_LEFT);
+            doc.add(preface);
+
+
+            str = totalMTTVA + "";
+            str = new StringBuilder(str).insert(str.length() - 3, ",")
+                    .toString();
+            preface = new Paragraph(new Phrase("Montant TVA      : "+facture.getSeances().first().getSeanceType().getMTTVA()+" D   x "+facture.getSeances().size()+" = "+str +" D", normal));
+            preface.setAlignment(Element.ALIGN_LEFT);
+            doc.add(preface);
+
+
+            str = totalGlobal + "";
+            str = new StringBuilder(str).insert(str.length() - 3, ",")
+                    .toString();
+            preface = new Paragraph(new Phrase("Montant TTC      :  "+str +" D", normal));
+            preface.setAlignment(Element.ALIGN_LEFT);
+            doc.add(preface);
+
 
             String dinars = FrenchNumberToWords.convert(totalGlobal / 1000) + " dinars";
             String Millimes = FrenchNumberToWords.convert(totalGlobal % 1000) + " Millimes";

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.SortedSet;
 
 @Component
 @AllArgsConstructor
@@ -86,9 +87,9 @@ public class SeanceServiceImpl implements SeanceService{
     }
 
     @Override
-    public List<Seance> findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(String patientId,
-                                                                                   LocalDate startDate,
-                                                                                   LocalDate endDate) {
+    public SortedSet<Seance> findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(String patientId,
+                                                                                        LocalDate startDate,
+                                                                                        LocalDate endDate) {
         return seanceRepository.findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(Long.parseLong(patientId),startDate,endDate);
     }
 
