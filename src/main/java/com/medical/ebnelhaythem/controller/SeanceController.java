@@ -1,10 +1,12 @@
 package com.medical.ebnelhaythem.controller;
 
 import com.itextpdf.text.DocumentException;
+import com.medical.ebnelhaythem.entity.Bordereau;
 import com.medical.ebnelhaythem.entity.Facture;
 import com.medical.ebnelhaythem.entity.Seance;
+import com.medical.ebnelhaythem.service.BorderauPdfBuilder;
+import com.medical.ebnelhaythem.service.BordereauService;
 import com.medical.ebnelhaythem.service.FactureService;
-import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.SeanceService;
 import com.medical.ebnelhaythem.utils.JwtUtil;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,9 +35,10 @@ public class SeanceController {
 
     private SeanceService seanceService;
 
-    private PatientService patientService;
-
     private FactureService factureService;
+
+    private BordereauService  bordereauService;
+
 
     private JwtUtil jwtUtilil;
 
@@ -90,7 +94,7 @@ public class SeanceController {
      * @throws DocumentException
      */
     @PostMapping(path = "/list/factures/month/{month}/year/{year}")
-    public ResponseEntity<InputStreamResource>  getFacturePatient(HttpServletResponse response,
+    public ResponseEntity<InputStreamResource>  getFacturePatients(HttpServletResponse response,
                                                                   @RequestBody List<String> patientIds,
                                                                   @RequestHeader("Authorization") String token ,
                                                                   @PathVariable Integer month,
@@ -105,9 +109,49 @@ public class SeanceController {
 
         Facture facture = factureService.createPatientFacture(patientIds.get(0),startDate,endDate,jwtUtilil.getCliniqueId(token));
 
-        ByteArrayInputStream bis = factureService.getFacturePatient(facture);
+        ByteArrayInputStream bis = factureService.getFacturePatientPdf(facture);
 
         var headers = new HttpHeaders();
+
+        headers.add("Content-Disposition", "inline; filename=FacturesParPatient"
+                +month+"/"+year+".pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+
+    }
+
+    /**
+     *
+     * @param response
+     * @param patientIds
+     * @param month
+     * @param year
+     * @return
+     * @throws DocumentException
+     */
+    @PostMapping(path = "/borderau/month/{month}/year/{year}")
+    public ResponseEntity<InputStreamResource>  getBorderauPatients(HttpServletResponse response,
+                                                                  @RequestBody List<Long> patientIds,
+                                                                  @RequestHeader("Authorization") String token ,
+                                                                  @PathVariable Integer month,
+                                                                  @PathVariable Integer year) throws DocumentException, ParseException {
+
+
+        response.setContentType("application/pdf");
+
+        LocalDate startDate = LocalDate.of(year, month, 1);
+
+        LocalDate endDate = startDate.with(lastDayOfMonth());
+
+        Bordereau bordereau = bordereauService.createBorderaByPatientsAndDate(patientIds,startDate,
+                endDate,jwtUtilil.getCliniqueId(token));
+
+        ByteArrayInputStream bis = bordereauService.getBorderauPdf(bordereau);
+         var headers = new HttpHeaders();
 
         headers.add("Content-Disposition", "inline; filename=FacturesParPatient"
                 +month+"/"+year+".pdf");

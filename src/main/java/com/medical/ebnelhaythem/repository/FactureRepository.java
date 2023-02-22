@@ -13,6 +13,8 @@ public interface FactureRepository extends JpaRepository<Facture, Long> {
                                                                              LocalDate startDate,
                                                                              LocalDate endDate);
 
+    List<Facture> findByDateAndPatientIdIn(LocalDate endDate,List<Long> patientsId);
+
     Facture findByPatientIdAndDate(Long patientId,LocalDate date);
 
     Facture findTop1ByPatient_User_CliniqueIdOrderByIdDesc(Long cliniqueId);

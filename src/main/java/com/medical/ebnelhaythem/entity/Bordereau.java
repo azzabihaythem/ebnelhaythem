@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Bordereau extends BaseEntity{
 
     @JsonProperty
     @Column
-    private Date date;
+    private LocalDate date;
 
     @JsonProperty
     @OneToMany

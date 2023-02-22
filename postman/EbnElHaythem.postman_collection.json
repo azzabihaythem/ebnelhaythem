@@ -306,6 +306,74 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "7-Get Borderau By periode for list of patients 2 Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  1\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/borderau/month/3/year/2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"borderau",
+						"month",
+						"3",
+						"year",
+						"2023"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7-Get Borderau By periode for list of patients 2 Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  1\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/borderau/month/4/year/2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"borderau",
+						"month",
+						"4",
+						"year",
+						"2023"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FactureLastNumber extends BaseEntity{
+public class BorderauLastNumber extends BaseEntity{
 
     @JsonProperty
     @JoinColumn(name="clinique_id", nullable=false,unique = true)
@@ -22,5 +22,5 @@ public class FactureLastNumber extends BaseEntity{
     @JsonProperty
     @Column
     private String number;
-
+    
 }

@@ -35,7 +35,7 @@ public class FactureServiceImpl implements FactureService{
 
 
     @Override
-    public ByteArrayInputStream getFacturePatient(Facture  facture) throws DocumentException {
+    public ByteArrayInputStream getFacturePatientPdf(Facture  facture) throws DocumentException {
 
         return facturePdfBuilder.doPdf(facture);
     }
@@ -80,6 +80,11 @@ public class FactureServiceImpl implements FactureService{
     @Override
     public Facture save(Facture facture) {
         return null;
+    }
+
+    @Override
+    public List<Facture> findByDateAndPatientIdIn(LocalDate endDate,List<Long> patientIds) {
+        return factureRepository.findByDateAndPatientIdIn(endDate,patientIds);
     }
 
     public Facture getFactureByPatientId(String patientId, Integer month,Integer year){
