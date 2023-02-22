@@ -4,10 +4,7 @@ import com.itextpdf.text.DocumentException;
 import com.medical.ebnelhaythem.entity.Bordereau;
 import com.medical.ebnelhaythem.entity.Facture;
 import com.medical.ebnelhaythem.entity.Seance;
-import com.medical.ebnelhaythem.service.BorderauPdfBuilder;
-import com.medical.ebnelhaythem.service.BordereauService;
-import com.medical.ebnelhaythem.service.FactureService;
-import com.medical.ebnelhaythem.service.SeanceService;
+import com.medical.ebnelhaythem.service.*;
 import com.medical.ebnelhaythem.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
@@ -38,6 +38,8 @@ public class SeanceController {
     private FactureService factureService;
 
     private BordereauService  bordereauService;
+    private FctrsService fctrsService;
+
 
 
     private JwtUtil jwtUtilil;
@@ -164,5 +166,24 @@ public class SeanceController {
 
     }
 
+    @ResponseBody
+    @GetMapping(path =  "/txt/borderau/month/{month}/year/{year}")
+    public void txtResponse(HttpServletResponse response, @RequestHeader("Authorization") String token ,
+                              @PathVariable Integer month,
+                              @PathVariable Integer year) throws IOException {
+
+        String fileName = "fctrs"+month+"-"+year+".txt";
+        response.setHeader("Content-Disposition", "attachment; filename="
+                + fileName);
+        response.setContentType("text/plain");
+        LocalDate startDate = LocalDate.of(year, month, 1);
+        LocalDate endDate = startDate.with(lastDayOfMonth());
+        Bordereau bordereau = bordereauService.findByDateAndCliniqueId(endDate,jwtUtilil.getCliniqueId(token));
+        ServletOutputStream out = response.getOutputStream();
+        String result = fctrsService.createTextFile(bordereau);
+        out.println(result);
+        out.flush();
+        out.close();
+    }
 
 }

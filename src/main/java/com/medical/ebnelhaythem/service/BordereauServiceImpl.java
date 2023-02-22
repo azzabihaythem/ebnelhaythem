@@ -54,6 +54,11 @@ public class BordereauServiceImpl implements BordereauService{
     }
 
     @Override
+    public Bordereau findByDateAndCliniqueId(LocalDate date, long cliniqueId) {
+        return bordereauRepository.findByDateAndCliniqueId(date,cliniqueId);
+    }
+
+    @Override
     public ByteArrayInputStream getBorderauPdf(Bordereau bordereau) throws DocumentException, ParseException {
         return bordereauPdfBuilder.doPdf(bordereau);
     }

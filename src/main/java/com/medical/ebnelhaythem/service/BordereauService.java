@@ -15,6 +15,6 @@ public interface BordereauService {
     BorderauLastNumber findByCliniqueId(Long cliniqueId);
 
     Bordereau createBorderaByPatientsAndDate(List<Long> patientIds, LocalDate startDate, LocalDate endDate, long cliniqueId);
-
+    Bordereau findByDateAndCliniqueId(LocalDate date,long cliniqueId);
     ByteArrayInputStream getBorderauPdf(Bordereau bordereau) throws DocumentException, ParseException;
 }

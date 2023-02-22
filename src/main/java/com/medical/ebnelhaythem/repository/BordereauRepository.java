@@ -10,6 +10,6 @@ import java.util.List;
 @RepositoryRestResource(exported = false)
 public interface BordereauRepository extends JpaRepository<Bordereau, Long> {
 
-    Bordereau findByDateAndCliniqueId(LocalDate endDate, Long cliniqueId);
+    Bordereau findByDateAndCliniqueId(LocalDate endDate, long cliniqueId);
 
 }
