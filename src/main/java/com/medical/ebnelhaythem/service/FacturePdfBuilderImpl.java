@@ -24,7 +24,15 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             Font.NORMAL);
 
     @Override
-    public ByteArrayInputStream doPdf(Facture facture) throws DocumentException {
+    public ByteArrayInputStream doPdf(List<Facture> factureList) throws DocumentException {
+
+        Document doc = new Document();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PdfWriter.getInstance(doc, out);
+        doc.open();
+
+        for (Facture facture : factureList){
+
 
         if (facture.getSeances().size() > 0) {
             Paragraph preface;
@@ -39,10 +47,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
 
 
 
-            Document doc = new Document();
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            PdfWriter.getInstance(doc, out);
-            doc.open();
+
 
             preface = new Paragraph(new Phrase("", normal));
             preface.setAlignment(Element.ALIGN_LEFT);
@@ -138,7 +143,8 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 
-            preface = new Paragraph(new Phrase("     Prise en charge      : N°" + patient.getPriseEnCharges() + " DU " + patient.getPriseEnCharges().get(0).getStartDate() + " AU " + patient.getPriseEnCharges().get(0).getEndDate(), normal));
+            //todo update to actual priseEnCharge dependes en seances dates
+            preface = new Paragraph(new Phrase("     Prise en charge      : N°" + patient.getPriseEnCharges().get(0).getNumber() + " DU " + patient.getPriseEnCharges().get(0).getStartDate() + " AU " + patient.getPriseEnCharges().get(0).getEndDate(), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 
@@ -153,7 +159,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             cal.set(Calendar.DAY_OF_MONTH, 1);// This is necessary to get proper results
             cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
             cal.getTime();
-            preface = new Paragraph(new Phrase("     Date Facture          : " + cal.getTime(), normal));
+            preface = new Paragraph(new Phrase("     Date Facture          : " + facture.getDate(), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
             preface = new Paragraph(new Phrase("\n", normal));
@@ -384,10 +390,12 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
         preface.setAlignment(Element.ALIGN_LEFT);
         doc.add(preface);
 
+        }
+        doc.newPage();
+        }
+
         doc.close();
 
-            return new ByteArrayInputStream(out.toByteArray());
-        }
-        return null;
+        return new ByteArrayInputStream(out.toByteArray());
     }
 }

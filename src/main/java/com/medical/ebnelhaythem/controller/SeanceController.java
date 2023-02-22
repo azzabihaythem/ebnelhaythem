@@ -107,9 +107,9 @@ public class SeanceController {
 
         LocalDate endDate = startDate.with(lastDayOfMonth());
 
-        Facture facture = factureService.createPatientFacture(patientIds.get(0),startDate,endDate,jwtUtilil.getCliniqueId(token));
+        List<Facture> factureList = factureService.createListPatientFacture(patientIds,startDate,endDate,jwtUtilil.getCliniqueId(token));
 
-        ByteArrayInputStream bis = factureService.getFacturePatientPdf(facture);
+        ByteArrayInputStream bis = factureService.getFacturePatientPdf(factureList);
 
         var headers = new HttpHeaders();
 

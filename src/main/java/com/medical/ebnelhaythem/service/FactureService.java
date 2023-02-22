@@ -8,10 +8,15 @@ import java.util.List;
 
 public interface FactureService {
 
-    public ByteArrayInputStream getFacturePatientPdf(Facture facture) throws DocumentException;
+    public ByteArrayInputStream getFacturePatientPdf(List<Facture> factureList) throws DocumentException;
 
     public Facture  createPatientFacture(String patientId, LocalDate startDate,
-                                         LocalDate endDate,long cliniqueId) throws DocumentException;
+                                         LocalDate endDate,long cliniqueId);
+
+    public List<Facture>  createListPatientFacture(List<String> patientIds,
+                                                   LocalDate startDate,
+                                                   LocalDate endDate,
+                                                   long cliniqueId);
 
     public Facture save(Facture facture);
 

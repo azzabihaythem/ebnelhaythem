@@ -3,6 +3,7 @@ package com.medical.ebnelhaythem.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -23,10 +24,10 @@ public class PriseEnCharge extends BaseEntity {
 
     @JsonProperty
     @Column
-    private Date startDate;
+    private LocalDate startDate;
 
     @JsonProperty
     @Column
-    private Date endDate;
+    private LocalDate endDate;
 
 }

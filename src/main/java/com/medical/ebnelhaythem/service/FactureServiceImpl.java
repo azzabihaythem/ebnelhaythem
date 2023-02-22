@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
@@ -35,17 +36,16 @@ public class FactureServiceImpl implements FactureService{
 
 
     @Override
-    public ByteArrayInputStream getFacturePatientPdf(Facture  facture) throws DocumentException {
+    public ByteArrayInputStream getFacturePatientPdf(List<Facture> factureList) throws DocumentException {
 
-        return facturePdfBuilder.doPdf(facture);
+        return facturePdfBuilder.doPdf(factureList);
     }
 
     @Override
     public Facture  createPatientFacture(String patientId,
                                          LocalDate startDate,
                                          LocalDate endDate,
-                                         long cliniqueId)
-            throws DocumentException {
+                                         long cliniqueId) {
 
         Facture  facture = factureRepository.findByPatientIdAndDate(Long.parseLong(patientId),endDate);
         List<Seance> seanceList = seanceService.
@@ -60,6 +60,19 @@ public class FactureServiceImpl implements FactureService{
         facture.setSeances(seanceList);
 
         return factureRepository.save(facture);
+    }
+
+    @Override
+    public List<Facture>  createListPatientFacture(List<String> patientIds,
+                                         LocalDate startDate,
+                                         LocalDate endDate,
+                                         long cliniqueId) {
+        List<Facture> factureList = new ArrayList<>();
+
+        for (String patientId:patientIds) {
+            factureList.add(createPatientFacture(patientId,startDate,endDate,cliniqueId));
+        }
+        return  factureList;
     }
 
     private String getLastFactureNumberByCliniqueId(long cliniqueId) {

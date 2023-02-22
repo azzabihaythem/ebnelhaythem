@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface FacturePdfBuilder {
 
-    public ByteArrayInputStream doPdf(Facture facture) throws DocumentException;
+    public ByteArrayInputStream doPdf(List<Facture> factureList) throws DocumentException;
 
 }

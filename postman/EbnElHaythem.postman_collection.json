@@ -116,7 +116,37 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"affile\": \"affile\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"doit\",\r\n  \"numAffiliation\": \"numAffiliation1001\",\r\n   \"seanceDays\": [\r\n    \"MONDAY\",\r\n    \"WEDNESDAY\",\r\n    \"FRIDAY\"\r\n  ],\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"id\": 0,\r\n      \"number\": \"string\",\r\n      \"startDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"clinique\": { \r\n        \"id\": 1\r\n        }\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"patient1\",\r\n    \"login\": \"noLogin\",\r\n    \"password\": \"noPassword\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
+					"raw": "{\r\n  \"affile\": \"affile\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"doit\",\r\n  \"numAffiliation\": \"654654654-01\",\r\n   \"seanceDays\": [\r\n    \"MONDAY\",\r\n    \"WEDNESDAY\",\r\n    \"FRIDAY\"\r\n  ],\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"id\": 0,\r\n      \"number\": \"67 2022 5654\",\r\n      \"startDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"clinique\": { \r\n        \"id\": 1\r\n        }\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"patient1\",\r\n    \"login\": \"noLogin\",\r\n    \"password\": \"noPassword\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3-post patients 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"affile\": \"affile\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"doit\",\r\n  \"numAffiliation\": \"58984654-01\",\r\n   \"seanceDays\": [\r\n    \"MONDAY\",\r\n    \"WEDNESDAY\",\r\n    \"FRIDAY\"\r\n  ],\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"id\": 0,\r\n      \"number\": \"67 2023 5555\",\r\n      \"startDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"clinique\": { \r\n        \"id\": 1\r\n        }\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"patient1\",\r\n    \"login\": \"noLogin\",\r\n    \"password\": \"noPassword\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/patients",
@@ -176,7 +206,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n  \"1\"\r\n]"
+					"raw": "[\r\n  \"1\",\"2\"\r\n]"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/list/seances/typeSeanceId/1/startDate/01-03-2023/endDate/31-03-2023",
@@ -213,7 +243,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n  \"1\"\r\n]"
+					"raw": "[\r\n  \"1\",\"2\"\r\n]"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/list/seances/typeSeanceId/1/startDate/01-04-2023/endDate/30-04-2023",
@@ -250,7 +280,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n  \"1\"\r\n]"
+					"raw": "[\r\n  \"1\",\"2\"\r\n]"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/list/factures/month/3/year/2023",
@@ -285,7 +315,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n  \"1\"\r\n]"
+					"raw": "[\r\n  \"1\",\"2\"\r\n]"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/list/factures/month/4/year/2023",
@@ -320,7 +350,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n  1\r\n]"
+					"raw": "[\r\n  1,2\r\n]"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/borderau/month/3/year/2023",
@@ -354,7 +384,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n  1\r\n]"
+					"raw": "[\r\n  1,2\r\n]"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/borderau/month/4/year/2023",
