@@ -2,6 +2,7 @@ package com.medical.ebnelhaythem.service;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import com.medical.ebnelhaythem.entity.Bordereau;
 import com.medical.ebnelhaythem.entity.Facture;
@@ -119,15 +120,11 @@ public class FctrsServiceImpl implements FctrsService {
 		SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
 		sdf.applyPattern(NEW_FORMAT);
 
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.MONTH, bordereau.getDate().getMonth().getValue());
-		cal.set(Calendar.YEAR,  bordereau.getDate().getYear());
-		cal.set(Calendar.DAY_OF_MONTH, 1);// This is necessary to get proper
-											// results
-		cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
-		cal.getTime();
 
-		borderauLine = borderauLine + sdf.format(cal.getTime());// date du
+		String cliniqueDateFormat ="yyyyMMdd";
+
+		DateTimeFormatter cliniqueDateFormatFormatter = DateTimeFormatter.ofPattern(cliniqueDateFormat);
+		borderauLine = borderauLine + bordereau.getDate().format(cliniqueDateFormatFormatter);// date du
 																// borderau
 		String tva = (Long.parseLong(seanceType.getMTTVA()) * SeanceNumber)
 				+ "";
@@ -161,7 +158,9 @@ public class FctrsServiceImpl implements FctrsService {
 
 	@Override
 	public String factureLines(Bordereau bordereau) {
+		String cliniqueDateFormat ="yyyyMMdd";
 
+		DateTimeFormatter cliniqueDateFormatFormatter = DateTimeFormatter.ofPattern(cliniqueDateFormat);
 		String borderauLines = "";
 		for (Facture fact : bordereau.getFactures()){
 
@@ -304,31 +303,12 @@ public class FctrsServiceImpl implements FctrsService {
 		LocalDate datefin = fact.getSeances().last().getDate();
 		System.out.println("datefin  == " + datefin);
 
-		//todo verify format
-		String dateDebutDay = datedebut.getDayOfMonth() + "";
-		while (dateDebutDay.length() < 2) {
-			dateDebutDay = "0" + dateDebutDay;
-		}
-		System.out.println("dateDebutDay  == " + dateDebutDay);
-		String dateDebutMonth = (datedebut.getMonth().getValue() + 1) + "";
-		while (dateDebutMonth.length() < 2) {
-			dateDebutMonth = "0" + dateDebutMonth;
-		}
 
-		String DateDebut = bordereau.getDate().getYear() + dateDebutMonth + dateDebutDay;
+
+		String DateDebut = fact.getSeances().first().getDate().format(cliniqueDateFormatFormatter);
 		borderauLine = borderauLine + DateDebut;
-		//todo verify format
-		String dateFinDay = datefin.getDayOfMonth()+ "";
-		while (dateFinDay.length() < 2) {
-			dateFinDay = "0" + dateFinDay;
-		}
-		System.out.println("dateFinDay  == " + dateFinDay);
-		String dateFinMonth = (datefin.getMonth().getValue() + 1) + "";
-		while (dateFinMonth.length() < 2) {
-			dateFinMonth = "0" + dateFinMonth;
-		}
 
-		String dateFin = bordereau.getDate().getYear() + dateFinMonth + dateFinDay;
+		String dateFin = fact.getSeances().last().getDate().format(cliniqueDateFormatFormatter);
 		borderauLine = borderauLine + dateFin;
 
 		final String OLD_FORMAT = "yyyy-MM-dd";
@@ -336,15 +316,9 @@ public class FctrsServiceImpl implements FctrsService {
 		SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
 		sdf.applyPattern(NEW_FORMAT);
 
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.MONTH, bordereau.getDate().getMonth().getValue());
-		cal.set(Calendar.YEAR, bordereau.getDate().getYear());
-		cal.set(Calendar.DAY_OF_MONTH, 1);// This is necessary to get proper
-											// results
-		cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
-		cal.getTime();
 
-		borderauLine = borderauLine + sdf.format(cal.getTime());// date du
+
+		borderauLine = borderauLine + bordereau.getDate().format(cliniqueDateFormatFormatter);// date du
 																// borderau
 
 		Long prixTVA = fact.getSeances().size() * Long.parseLong(seanceType.getMTTVA());

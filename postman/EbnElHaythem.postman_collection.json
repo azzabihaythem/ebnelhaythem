@@ -116,7 +116,37 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"affile\": \"affile\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"doit\",\r\n  \"numAffiliation\": \"654654654-01\",\r\n   \"seanceDays\": [\r\n    \"MONDAY\",\r\n    \"WEDNESDAY\",\r\n    \"FRIDAY\"\r\n  ],\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"id\": 0,\r\n      \"number\": \"67 2022 5654\",\r\n      \"startDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"clinique\": { \r\n        \"id\": 1\r\n        }\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"patient1\",\r\n    \"login\": \"noLogin\",\r\n    \"password\": \"noPassword\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
+					"raw": "{\r\n  \"affile\": \"CNSS\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"CNAM\",\r\n  \"numAffiliation\": \"654654654-01\",\r\n   \"seanceDays\": [\r\n    \"MONDAY\",\r\n    \"WEDNESDAY\",\r\n    \"FRIDAY\"\r\n  ],\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"id\": 0,\r\n      \"number\": \"67 2022 5654\",\r\n      \"startDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"clinique\": { \r\n        \"id\": 1\r\n        }\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"lastName1\",\r\n    \"firstName\": \"firstname1\",\r\n    \"login\": \"noLogin\",\r\n    \"password\": \"noPassword\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3-post patients 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"affile\": \"CNSS\",\r\n  \"desactivationDate\": \"2023-01-01\",\r\n  \"doit\": \"Cnam\",\r\n  \"numAffiliation\": \"911614-0\",\r\n  \"seanceDays\":\r\n   [\r\n       \"FRIDAY\",\r\n       \"MONDAY\",\r\n       \"WEDNESDAY\"\r\n    ],\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2023-01-01\",\r\n      \"id\": 0,\r\n      \"number\": \"67 2023 1289\",\r\n      \"startDate\": \"2023-01-01\",\r\n      \"clinique\": { \r\n        \"id\": 1\r\n        }\r\n    }\r\n  ],\r\n  \"user\": {\r\n     \"id\": 3, \r\n    \"lastName\": \"Imen\",\r\n    \"firstName\": \"Trab\",\r\n    \"login\": \"911614-0\",\r\n    \"password\": \"noPassword\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/patients",
@@ -146,7 +176,37 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"affile\": \"affile\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"doit\",\r\n  \"numAffiliation\": \"58984654-01\",\r\n   \"seanceDays\": [\r\n    \"MONDAY\",\r\n    \"WEDNESDAY\",\r\n    \"FRIDAY\"\r\n  ],\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"id\": 0,\r\n      \"number\": \"67 2023 5555\",\r\n      \"startDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"clinique\": { \r\n        \"id\": 1\r\n        }\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"patient1\",\r\n    \"login\": \"noLogin\",\r\n    \"password\": \"noPassword\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
+					"raw": "{\r\n  \"affile\": \"CNSS\",\r\n  \"desactivationDate\": \"2022-02-07T10:28:51.338Z\",\r\n  \"doit\": \"CNAM\",\r\n  \"numAffiliation\": \"58984654-01\",\r\n   \"seanceDays\": [\r\n    \"MONDAY\",\r\n    \"WEDNESDAY\",\r\n    \"FRIDAY\"\r\n  ],\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"id\": 0,\r\n      \"number\": \"67 2023 5555\",\r\n      \"startDate\": \"2022-08-01T09:45:42.642Z\",\r\n      \"clinique\": { \r\n        \"id\": 1\r\n        }\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"id\": 3,\r\n    \"lastName\": \"lastName2\",\r\n    \"firstName\": \"firstname2\",\r\n    \"login\": \"noLogin2\",\r\n    \"password\": \"noPassword2\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3-post patients list",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"affile\": \"{{AFFILE}}\",\r\n  \"doit\": \"{{DOIT}}\",\r\n  \"numAffiliation\": \"{{NUMAFFLICALTION}}\",\r\n   \"seanceDays\": {{seanceDays}},\r\n  \"priseEnCharges\": [\r\n    {\r\n      \"endDate\": \"{{DATEF_PRISE_EN_CHARGE}}\",\r\n      \"id\": 0,\r\n      \"number\": \"{{Num_PRISE_EN_CHARGE}}\",\r\n      \"startDate\": \"{{DATED_PRISE_EN_CHARGE}}\",\r\n      \"clinique\": { \r\n        \"id\": 1\r\n        }\r\n    }\r\n  ],\r\n  \"user\": {\r\n    \"lastName\": \"{{firstName}}\",\r\n    \"firstName\": \"{{lastName}}\",\r\n    \"login\": \"{{NUMAFFLICALTION}}\",\r\n    \"password\": \"noPassword\",\r\n    \"updateDate\": \"2022-02-07T10:28:51.338Z\",\r\n    \"clinique\": {\r\n      \"id\": 1\r\n    }\r\n  }\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:{{SERVER_PORT}}/v1/patients",
@@ -231,6 +291,43 @@
 			"response": []
 		},
 		{
+			"name": "5-post Seances By periode for listpatient Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  \"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\r\n  \"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\",\"18\",\"19\",\r\n  \"20\",\"21\",\"22\",\"23\",\"24\",\"25\",\"26\",\"27\",\"28\",\"29\",\r\n  \"30\",\"31\",\"32\",\"33\",\"34\",\"35\",\"36\",\"37\",\"38\",\"39\",\r\n  \"40\",\"41\",\"42\",\"43\",\"44\",\"45\",\"46\",\"47\",\"48\",\"49\",\r\n  \"50\",\"51\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\",\"59\",\r\n  \"60\",\"61\",\"62\",\"63\",\"64\",\"65\",\"66\",\"67\",\"68\",\"69\",\r\n  \"70\",\"71\",\"72\",\"73\",\"74\",\"75\",\"76\",\"77\",\"78\",\"79\",\r\n  \"80\",\"81\",\"82\",\"83\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/list/seances/typeSeanceId/1/startDate/01-02-2023/endDate/28-02-2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"list",
+						"seances",
+						"typeSeanceId",
+						"1",
+						"startDate",
+						"01-02-2023",
+						"endDate",
+						"28-02-2023"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "5-post Seances By periode for listpatient 2",
 			"request": {
 				"method": "POST",
@@ -295,6 +392,41 @@
 						"factures",
 						"month",
 						"3",
+						"year",
+						"2023"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6-Get Factures By periode for list of patients Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  \"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\r\n  \"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\",\"18\",\"19\",\r\n  \"20\",\"21\",\"22\",\"23\",\"24\",\"25\",\"26\",\"27\",\"28\",\"29\",\r\n  \"30\",\"31\",\"32\",\"33\",\"34\",\"35\",\"36\",\"37\",\"38\",\"39\",\r\n  \"40\",\"41\",\"42\",\"43\",\"44\",\"45\",\"46\",\"47\",\"48\",\"49\",\r\n  \"50\",\"51\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\",\"59\",\r\n  \"60\",\"61\",\"62\",\"63\",\"64\",\"65\",\"66\",\"67\",\"68\",\"69\",\r\n  \"70\",\"71\",\"72\",\"73\",\"74\",\"75\",\"76\",\"77\",\"78\",\"79\",\r\n  \"80\",\"81\",\"82\",\"83\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/list/factures/month/2/year/2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"list",
+						"factures",
+						"month",
+						"2",
 						"year",
 						"2023"
 					]
@@ -372,6 +504,40 @@
 			"response": []
 		},
 		{
+			"name": "7-Get Borderau By periode for list of patients 2 Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  1,2\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/borderau/month/3/year/2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"borderau",
+						"month",
+						"3",
+						"year",
+						"2023"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "7-Get Borderau By periode for list of patients 2 Copy 2",
 			"request": {
 				"method": "POST",
@@ -398,6 +564,44 @@
 						"borderau",
 						"month",
 						"4",
+						"year",
+						"2023"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8-Get txt Borderau By periode for list of patients 2 Copy 3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{SERVER_PORT}}/v1/txt/borderau/month/3/year/2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{SERVER_PORT}}",
+					"path": [
+						"v1",
+						"txt",
+						"borderau",
+						"month",
+						"3",
 						"year",
 						"2023"
 					]

@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -207,16 +208,17 @@ public class BorderauPdfBuilderImpl implements BorderauPdfBuilder{
 				MTTVA = Long.parseLong(afact.getSeances().first().getSeanceType().getMTTVA())*seanceNumber;
 				EXONERE =  Long.parseLong(afact.getSeances().first().getSeanceType().getEXONERE())*seanceNumber;
 //				MSP = Long.parseLong(afact.getMsp());
-				ttc=MTHTAXE+MTTVA; //todo verify this ligne
+				ttc=MTHTAXE+MTTVA+EXONERE;
 				totalGlobal=totalGlobal+ttc;
 				totalMTHTAXE = totalMTHTAXE + MTHTAXE;
 				totalMTTVA = totalMTTVA + MTTVA;
 				totalEXONERE = totalEXONERE + EXONERE;
 //				totalMSP = totalMSP + MSP;
-				
+				String cliniqueDateFormat ="dd/MM/yyyy";
+				DateTimeFormatter cliniqueDateFormatFormatter = DateTimeFormatter.ofPattern(cliniqueDateFormat);
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setPhrase(new Phrase(( sdf.format(cal.getTime()) + ""), normal));
+					cell.setPhrase(new Phrase( bordereau.getDate().format(cliniqueDateFormatFormatter).toString(), normal));
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					table.addCell(cell);

@@ -43,14 +43,14 @@ public class EbnelhaythemApplication {
 
 		if(cliniqueRepository.findAll().size()==0){
 			cliniqueRepository.save(new Clinique(1,null,null,true,"CLINIQUE IBN ELHAITHEM","RUE DE L'ENVIRONNEMENT ENNAHAL GABE",
-					"1355934/R/A/M000","B02140622014","005661515",
+					"1355934/R/A/M000","B02140622014","0056615159",
 					"75227816","BANQUE DE TUNISIE","05038000106300019897","00213093",
 					"67"));
 		}
 
 		if(seanceTypeRepository.findAll().size()==0){
-			seanceTypeRepository.save(new SeanceType("SeanceClassic","77000","33000",
-					"10000","4000"));
+			seanceTypeRepository.save(new SeanceType("SeanceClassic","90654","6346",
+					"33000","0"));
 		}
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
     public static Font normal2 = FontFactory.getFont(BaseFont.IDENTITY_H, 12,
             Font.NORMAL);
 
+
+
     @Override
     public ByteArrayInputStream doPdf(List<Facture> factureList) throws DocumentException {
 
@@ -31,6 +34,9 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
         PdfWriter.getInstance(doc, out);
         doc.open();
 
+        String cliniqueDateFormat ="dd/MM/yyyy";
+
+        DateTimeFormatter cliniqueDateFormatFormatter = DateTimeFormatter.ofPattern(cliniqueDateFormat);
         for (Facture facture : factureList){
 
 
@@ -144,7 +150,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             doc.add(preface);
 
             //todo update to actual priseEnCharge dependes en seances dates
-            preface = new Paragraph(new Phrase("     Prise en charge      : N°" + patient.getPriseEnCharges().get(0).getNumber() + " DU " + patient.getPriseEnCharges().get(0).getStartDate() + " AU " + patient.getPriseEnCharges().get(0).getEndDate(), normal));
+            preface = new Paragraph(new Phrase("     Prise en charge      : N°" + patient.getPriseEnCharges().get(0).getNumber() + " DU " + patient.getPriseEnCharges().get(0).getStartDate().format(cliniqueDateFormatFormatter) + " AU " + patient.getPriseEnCharges().get(0).getEndDate().format(cliniqueDateFormatFormatter), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 
@@ -159,16 +165,16 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             cal.set(Calendar.DAY_OF_MONTH, 1);// This is necessary to get proper results
             cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
             cal.getTime();
-            preface = new Paragraph(new Phrase("     Date Facture          : " + facture.getDate(), normal));
+            preface = new Paragraph(new Phrase("     Date Facture          : " + facture.getDate().format(cliniqueDateFormatFormatter), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
             preface = new Paragraph(new Phrase("\n", normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 
-            PdfPTable table = new PdfPTable(6);
+            PdfPTable table = new PdfPTable(3);
             table.setWidthPercentage(100.0f);
-            table.setWidths(new float[]{4.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f});
+            table.setWidths(new float[]{4.0f, 4.0f, 4.0f});
             table.setSpacingBefore(10);
 
             // define font for table header row
@@ -182,29 +188,15 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cell.setPadding(5);
             // write table header
-            cell.setPhrase(new Phrase("Jour de pr�sence", normal));
+            cell.setPhrase(new Phrase("Jour de présence", normal));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             table.addCell(cell);
-
-            cell.setPhrase(new Phrase("MT,H,TAXE", normal));
+            cell.setPhrase(new Phrase("MONTANT", normal));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             table.addCell(cell);
-
-            cell.setPhrase(new Phrase("MT T,V,A", normal));
-            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            table.addCell(cell);
-            cell.setPhrase(new Phrase("EXONERE", normal));
-            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            table.addCell(cell);
-            cell.setPhrase(new Phrase("M,S,P", normal));
-            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            table.addCell(cell);
-            cell.setPhrase(new Phrase("T,T,C", normal));
+            cell.setPhrase(new Phrase("T.V.A", normal));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             table.addCell(cell);
@@ -228,7 +220,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
                         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                         cell.setPhrase(new Phrase("1 ére seance  "
-                                + aSeance.getDate(), normal));
+                                + aSeance.getDate().format(cliniqueDateFormatFormatter), normal));
                         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                         table.addCell(cell);
@@ -237,7 +229,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
                         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                         cell.setPhrase(new Phrase(i + " éme seance "
-                                + aSeance.getDate(), normal));
+                                + aSeance.getDate().format(cliniqueDateFormatFormatter), normal));
                         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                         table.addCell(cell);
@@ -262,34 +254,8 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
                     cell.setPhrase(new Phrase(str, normal));
                     cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                     cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    table.addCell(cell);
-                    str = MTTVA + "";
-                    str = new StringBuilder(str).insert(str.length() - 3, ",")
-                            .toString();
-                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    cell.setPhrase(new Phrase(str, normal));
-                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    table.addCell(cell);
-                    str = EXONERE + "";
-                    str = new StringBuilder(str).insert(str.length() - 3, ",")
-                            .toString();
-                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    cell.setPhrase(new Phrase(str, normal));
-                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    table.addCell(cell);
-                    str = MSP + "";
-                    str = new StringBuilder(str).insert(str.length() - 3, ",")
-                            .toString();
-                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    cell.setPhrase(new Phrase(str, normal));
-                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    table.addCell(cell);
+                    //table.addCell(cell);
+
                     str = (MTHTAXE + MTTVA + EXONERE + MSP) + "";
                     str = new StringBuilder(str).insert(str.length() - 3, ",")
                             .toString();
@@ -299,6 +265,40 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
                     cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                     cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                     table.addCell(cell);
+
+                    str = MTTVA + "";
+                    str = new StringBuilder(str).insert(str.length() - 3, ",")
+                            .toString();
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    cell.setPhrase(new Phrase(str, normal));
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    table.addCell(cell);
+
+
+
+
+                    str = EXONERE + "";
+                    str = new StringBuilder(str).insert(str.length() - 3, ",")
+                            .toString();
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    cell.setPhrase(new Phrase(str, normal));
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    //table.addCell(cell);
+                    str = MSP + "0000";//todo delete msp
+                    str = new StringBuilder(str).insert(str.length() - 3, ",")
+                            .toString();
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    cell.setPhrase(new Phrase(str, normal));
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                   // table.addCell(cell);
+
+
                     totalGlobal = totalGlobal + MTHTAXE + MTTVA + EXONERE + MSP;
 
                 }
@@ -306,7 +306,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 table.addCell(cell);
-                String str = totalMTHTAXE + "";
+                String str = totalGlobal + "";
                 str = new StringBuilder(str).insert(str.length() - 3, ",")
                         .toString();
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -332,8 +332,8 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
                 cell.setPhrase(new Phrase(str, normal2));
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                table.addCell(cell);
-                str = totalMSP + "";
+               // table.addCell(cell);
+                str = totalMSP + "0000";//todo delete msp
                 str = new StringBuilder(str).insert(str.length() - 3, ",")
                         .toString();
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -341,7 +341,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
                 cell.setPhrase(new Phrase(str, normal2));
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                table.addCell(cell);
+                //table.addCell(cell);
                 str = totalGlobal + "";
                 str = new StringBuilder(str).insert(str.length() - 3, ",")
                         .toString();
@@ -350,7 +350,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
                 cell.setPhrase(new Phrase(str, normal2));
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                table.addCell(cell);
+               // table.addCell(cell);
             }
 
             doc.add(table);
@@ -359,26 +359,36 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
 
 
             String 	str ;
-            str = totalEXONERE + "";
+            String 	str2 = totalEXONERE +"" ;
+            str = facture.getSeances().first().getSeanceType().getEXONERE() + "";
             str = new StringBuilder(str).insert(str.length() - 3, ",")
                     .toString();
-            preface = new Paragraph(new Phrase("Montant exonéré :"+ facture.getSeances().first().getSeanceType().getEXONERE()+" D x "+facture.getSeances().size()+" = "+str +" D", normal));
+
+
+            str2 = new StringBuilder(str2).insert(str2.length() - 3, ",")
+                    .toString();
+            preface = new Paragraph(new Phrase("Montant exonéré :"+ str+" D x "+facture.getSeances().size()+" = "+str2 +" D", normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 
+            str2 = totalMTHTAXE +"" ;
+            str2 = new StringBuilder(str2).insert(str2.length() - 3, ",")
+                    .toString();
 
-            str = totalMTHTAXE + "";
+            str = facture.getSeances().first().getSeanceType().getMTHTAXE() + "";
             str = new StringBuilder(str).insert(str.length() - 3, ",")
                     .toString();
-            preface = new Paragraph(new Phrase("Montant H T       : "+facture.getSeances().first().getSeanceType().getMTHTAXE()+" D  x "+facture.getSeances().size()+" = "+str +" D", normal));
+            preface = new Paragraph(new Phrase("Montant H T       : "+str+" D  x "+facture.getSeances().size()+" = "+str2 +" D", normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 
-
-            str = totalMTTVA + "";
+            str2 = totalMTTVA +"" ;
+            str2 = new StringBuilder(str2).insert(str2.length() - 3, ",")
+                    .toString();
+            str = facture.getSeances().first().getSeanceType().getMTTVA() + "";
             str = new StringBuilder(str).insert(str.length() - 3, ",")
                     .toString();
-            preface = new Paragraph(new Phrase("Montant TVA      : "+facture.getSeances().first().getSeanceType().getMTTVA()+" D   x "+facture.getSeances().size()+" = "+str +" D", normal));
+            preface = new Paragraph(new Phrase("Montant TVA      : "+str+" D   x "+facture.getSeances().size()+" = "+str2 +" D", normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
 

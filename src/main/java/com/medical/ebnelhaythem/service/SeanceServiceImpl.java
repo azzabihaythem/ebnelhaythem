@@ -71,7 +71,7 @@ public class SeanceServiceImpl implements SeanceService{
                 && seanceType.isPresent()
                 && patient.get().getSeanceDays()!= null
                 && patient.get().getSeanceDays().size()>0) {
-
+            endDate = endDate.plusDays(1);
             startDate.datesUntil(endDate)
                             .filter(localDate -> patient.get().getSeanceDays()
                                     .contains(DAYS_OF_THE_WEEK.valueOf(localDate.getDayOfWeek().name())))
