@@ -136,7 +136,7 @@ public class PatientController {
 
 
 
-    @PreAuthorize("hasRole('employer') or hasRole('admin') or hasRole('superadmin') or hasRole('Patient') ")
+    //@PreAuthorize("hasRole('employer') or hasRole('admin') or hasRole('superadmin') or hasRole('Patient') ")
     //@CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/patient/update")
     public ResponseEntity<Patient> updatePatient(@RequestHeader(value = "Authorization") String jwt,
@@ -154,8 +154,6 @@ public class PatientController {
                // patient.setDesactivationDate(patientpayload.getDesactivationDate());
                 return new ResponseEntity(patientService.save(patient), HttpStatus.OK) ;
               //  return ResponseEntity.ok(patient);
-
-
 
     }
 

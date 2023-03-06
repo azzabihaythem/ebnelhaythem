@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -58,4 +59,31 @@ public class SeanceController {
         return new ResponseEntity(seance, HttpStatus.CREATED);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping(path = "/dseance/{id}")
+    public ResponseEntity<?> deleteSeance(@PathVariable("id") Long id){
+        log.debug("delete seance");
+        seanceService.deleteById(id);
+        return new ResponseEntity( HttpStatus.OK);
+    }
+
+   // @PreAuthorize("hasRole('employer') or hasRole('admin') or hasRole('superadmin') or hasRole('Patient') ")
+    //@CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/seance/update")
+    public ResponseEntity<?> updateSeance(@RequestHeader(value = "Authorization") String jwt,
+                                                 @RequestBody Seance seancepayload, @RequestParam Long PId) {
+
+        //if (jwtTokenUtil.verificationtoken(jwt) ) {
+        Seance seance = seanceService.findById(PId).get();
+        seance.setPatient(seancepayload.getPatient());
+        seance.setSeanceType(seancepayload.getSeanceType());
+        seance.setDate(seancepayload.getDate());
+        // patient.setDesactivationDate(patientpayload.getDesactivationDate());
+        return new ResponseEntity(seanceService.save(seance), HttpStatus.OK) ;
+        //  return ResponseEntity.ok(patient);
+    }
 }
