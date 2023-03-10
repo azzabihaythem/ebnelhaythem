@@ -231,7 +231,7 @@ public class BorderauPdfBuilderImpl implements BorderauPdfBuilder{
 					table.addCell(cell);
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setPhrase(new Phrase((afact.getPatient().getAffile() + ""), normal));
+					cell.setPhrase(new Phrase((afact.getPatient().getNumAffiliation() + ""), normal));
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					table.addCell(cell);
