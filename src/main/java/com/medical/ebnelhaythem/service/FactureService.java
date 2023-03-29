@@ -2,6 +2,8 @@ package com.medical.ebnelhaythem.service;
 
 import com.itextpdf.text.DocumentException;
 import com.medical.ebnelhaythem.entity.Facture;
+import com.medical.ebnelhaythem.entity.Seance;
+
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
 import java.util.List;
@@ -22,4 +24,7 @@ public interface FactureService {
 
     List<Facture> findByDateAndPatientIdIn(LocalDate endDate,List<Long> patientIds);
 
+    void deleteSeanceFromFacture(Long seanceId);
+
+    Facture findBySeancesContains(Seance seance);
 }

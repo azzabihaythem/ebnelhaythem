@@ -5,11 +5,15 @@ import com.medical.ebnelhaythem.entity.Seance;
 import com.medical.ebnelhaythem.entity.SeanceType;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.SortedSet;
 
 public interface SeanceService {
 
      public Seance save(Seance seance);
+
+     public void delete(Long seanceId);
+
 
      public void saveSeanceIfNotExist(LocalDate localDate,
                                       SeanceType seanceType,
@@ -22,4 +26,6 @@ public interface SeanceService {
      public SortedSet<Seance> findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(String patientId,
                                                                                          LocalDate startDate,
                                                                                          LocalDate endDate);
+
+     public Optional<Seance> findById(Long  seanceId);
 }

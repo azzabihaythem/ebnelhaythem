@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
@@ -38,9 +39,8 @@ public class SeanceController {
     private FactureService factureService;
 
     private BordereauService  bordereauService;
+
     private FctrsService fctrsService;
-
-
 
     private JwtUtil jwtUtilil;
 
@@ -58,6 +58,29 @@ public class SeanceController {
         log.debug("Create new seance");
 
         return new ResponseEntity(seanceService.save(seance), HttpStatus.CREATED);
+    }
+
+    /**
+     * delete seance
+     * @param seanceId
+     * @return
+     */
+    @DeleteMapping(path = "/seances/{seanceId}", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteSeance(@PathVariable Long seanceId)
+
+    {
+        log.info("delete seance = "+seanceId);
+        Optional<Seance> seance = seanceService.findById(seanceId);
+        if(seance.isPresent()) {
+            Facture facture = factureService.findBySeancesContains(seance.get());
+            if(facture !=null) {
+                facture.getSeances().remove(seance.get());
+                factureService.save(facture);
+            }
+            seanceService.delete(seanceId);
+        }
+        return new ResponseEntity( HttpStatus.OK);
     }
 
 

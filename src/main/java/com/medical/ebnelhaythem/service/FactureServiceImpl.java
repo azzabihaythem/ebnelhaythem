@@ -63,6 +63,8 @@ public class FactureServiceImpl implements FactureService{
         return factureRepository.save(facture);
     }
 
+
+
     @Override
     public List<Facture>  createListPatientFacture(List<String> patientIds,
                                          LocalDate startDate,
@@ -99,6 +101,16 @@ public class FactureServiceImpl implements FactureService{
     @Override
     public List<Facture> findByDateAndPatientIdIn(LocalDate endDate,List<Long> patientIds) {
         return factureRepository.findByDateAndPatientIdIn(endDate,patientIds);
+    }
+
+    @Override
+    public void deleteSeanceFromFacture(Long seanceId) {
+        seanceService.findById(seanceId);
+    }
+
+    @Override
+    public Facture findBySeancesContains(Seance seance) {
+        return factureRepository.findBySeancesContains(seance);
     }
 
     public Facture getFactureByPatientId(String patientId, Integer month,Integer year){

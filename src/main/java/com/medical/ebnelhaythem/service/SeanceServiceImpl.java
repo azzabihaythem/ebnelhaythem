@@ -29,6 +29,11 @@ public class SeanceServiceImpl implements SeanceService{
         return seanceRepository.save(seance);
     }
 
+    @Override
+    public void delete(Long seanceId) {
+        seanceRepository.deleteById(seanceId);
+    }
+
     /**
      * save Seance If Not Exist
      * @param localDate
@@ -91,6 +96,11 @@ public class SeanceServiceImpl implements SeanceService{
                                                                                         LocalDate startDate,
                                                                                         LocalDate endDate) {
         return seanceRepository.findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(Long.parseLong(patientId),startDate,endDate);
+    }
+
+    @Override
+    public Optional<Seance> findById(Long seanceId) {
+        return seanceRepository.findById(seanceId);
     }
 
 
