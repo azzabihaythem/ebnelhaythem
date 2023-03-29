@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.SortedSet;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
@@ -104,8 +105,14 @@ public class FactureServiceImpl implements FactureService{
     }
 
     @Override
-    public void deleteSeanceFromFacture(Long seanceId) {
-        seanceService.findById(seanceId);
+    public void removeSeanceFromFacture(Optional<Seance> seance) {
+        if(seance.isPresent()) {
+            Facture facture = findBySeancesContains(seance.get());
+            if(facture !=null) {
+                facture.getSeances().remove(seance.get());
+                save(facture);
+            }
+        }
     }
 
     @Override

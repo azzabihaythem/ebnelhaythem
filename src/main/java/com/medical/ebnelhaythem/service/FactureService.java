@@ -7,6 +7,7 @@ import com.medical.ebnelhaythem.entity.Seance;
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface FactureService {
 
@@ -24,7 +25,7 @@ public interface FactureService {
 
     List<Facture> findByDateAndPatientIdIn(LocalDate endDate,List<Long> patientIds);
 
-    void deleteSeanceFromFacture(Long seanceId);
+    void removeSeanceFromFacture(Optional<Seance> seance);
 
     Facture findBySeancesContains(Seance seance);
 }

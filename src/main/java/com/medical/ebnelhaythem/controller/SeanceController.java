@@ -70,16 +70,18 @@ public class SeanceController {
     public ResponseEntity<?> deleteSeance(@PathVariable Long seanceId)
 
     {
+
         log.info("delete seance = "+seanceId);
+
         Optional<Seance> seance = seanceService.findById(seanceId);
+
         if(seance.isPresent()) {
-            Facture facture = factureService.findBySeancesContains(seance.get());
-            if(facture !=null) {
-                facture.getSeances().remove(seance.get());
-                factureService.save(facture);
-            }
+
+            factureService.removeSeanceFromFacture(seance);
+
             seanceService.delete(seanceId);
         }
+
         return new ResponseEntity( HttpStatus.OK);
     }
 
