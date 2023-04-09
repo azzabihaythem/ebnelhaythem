@@ -39,17 +39,26 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient setPatientActive(Long id,Boolean active) {
-        Optional<Patient> patient = patientRepository.findById(id);
+    public void setPatientActive(Long patientId,Boolean active) {
+        Optional<Patient> patient = patientRepository.findById(patientId);
        if(patient.isPresent()){
            patient.get().setActive(active);
        }
         patientRepository.save(patient.get());
-        return null;
     }
 
     @Override
     public Page<Patient> findAll(Pageable pageable) {
         return patientRepository.findAll(pageable);
+    }
+
+    @Override
+    public void updateAllPatientStatus(Boolean active,Long cliniqueId) {
+       List<Patient> patientList = patientRepository.findAllByUser_CliniqueId(cliniqueId);
+        for (Patient aPatient : patientList
+        ){
+            aPatient.setActive(active);
+            patientRepository.save(aPatient);
+        }
     }
 }

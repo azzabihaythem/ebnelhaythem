@@ -5,6 +5,7 @@ import com.medical.ebnelhaythem.entity.Patient;
 import com.medical.ebnelhaythem.service.CliniqueService;
 import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.UserService;
+import com.medical.ebnelhaythem.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,8 @@ public class PatientController {
     private PatientService patientService;
 
     private CliniqueService cliniqueService;
+
+    private JwtUtil jwtUtilil;
 
     /**
      * Create a new clinique
@@ -103,12 +106,27 @@ public class PatientController {
 
     /**
      * desactivate patient  endPoint
-     * @param id Patient
+     * @param patientId Patient
      * @return
      */
-    @PutMapping(path = "/patients/activate/{id}/{activateValue}")
-    public ResponseEntity<?> deactivatePatient(@PathVariable("id") Long id,@PathVariable("active") Boolean active){
+    @PutMapping(path = "/patients/{patientId}/active/{active}")
+    public ResponseEntity<?> deactivatePatient(@PathVariable("patientId") Long patientId,@PathVariable("active") Boolean active){
         log.debug("set  patient active");
-        return new ResponseEntity(patientService.setPatientActive(id,active), HttpStatus.OK);
+        patientService.setPatientActive(patientId,active);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    /**
+     * updateAllPatientStatus endPoint
+     * @param active
+     * @return update all patients status
+     */
+    @PutMapping(path = "/patients/all/active/{active}")
+    public ResponseEntity<?> updateAllPatientStatus(@PathVariable("active") Boolean active,
+                                                    @RequestHeader("Authorization") String token){
+        log.debug("updateAllPatientStatus");
+        Long cliniqueId = jwtUtilil.getCliniqueId(token).longValue();
+        patientService.updateAllPatientStatus(active,cliniqueId);
+        return new ResponseEntity( HttpStatus.OK);
     }
 }

@@ -15,7 +15,9 @@ public interface PatientService {
 
     public void  deleteById(Long id);
 
-    public Patient setPatientActive(Long id,Boolean active);
+    public void setPatientActive(Long id,Boolean active);
 
     public Page<Patient> findAll(Pageable pageable);
+
+    public void updateAllPatientStatus(Boolean active,Long cliniqueId);
 }
