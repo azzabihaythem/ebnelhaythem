@@ -17,4 +17,9 @@ public class FactureLastNumberServiceImpl implements FactureLastNumberService{
     public FactureLastNumber findByCliniqueId(Long cliniqueId) {
         return factureLastNumberRepository.findByCliniqueId(cliniqueId);
     }
+
+    @Override
+    public FactureLastNumber save(FactureLastNumber factureLastNumber) {
+        return factureLastNumberRepository.save(factureLastNumber);
+    }
 }

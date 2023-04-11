@@ -1,11 +1,12 @@
 package com.medical.ebnelhaythem.service;
 
 import com.itextpdf.text.DocumentException;
-import com.medical.ebnelhaythem.entity.Facture;
-import com.medical.ebnelhaythem.entity.FactureLastNumber;
-import com.medical.ebnelhaythem.entity.Seance;
+import com.medical.ebnelhaythem.dto.PatientAndAbscenceDto;
+import com.medical.ebnelhaythem.entity.*;
+import com.medical.ebnelhaythem.repository.BorderauLastNumberRepository;
 import com.medical.ebnelhaythem.repository.FactureLastNumberRepository;
 import com.medical.ebnelhaythem.repository.FactureRepository;
+import com.medical.ebnelhaythem.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,10 @@ import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 @Slf4j
 public class FactureServiceImpl implements FactureService{
 
+    private FactureRepository factureRepository;
+
+    private BorderauLastNumberRepository borderauLastNumberRepository;
+
     private FacturePdfBuilder facturePdfBuilder;
 
     private CliniqueService cliniqueService;
@@ -32,9 +37,11 @@ public class FactureServiceImpl implements FactureService{
 
     private PatientService patientService;
 
-    private FactureRepository factureRepository;
+    private FactureLastNumberService factureLastNumberService;
 
-    private FactureLastNumberRepository factureLastNumberRepository;
+    private UserService userService;
+
+    private JwtUtil jwtUtilil;
 
 
     @Override
@@ -81,14 +88,14 @@ public class FactureServiceImpl implements FactureService{
 
     private String getLastFactureNumberByCliniqueId(long cliniqueId) {
         String lastFactureNumberByCliniqueId = "1";
-        FactureLastNumber factureLastNumber =  factureLastNumberRepository.findByCliniqueId(cliniqueId);
+        FactureLastNumber factureLastNumber =  factureLastNumberService.findByCliniqueId(cliniqueId);
         if(factureLastNumber!=null){
             lastFactureNumberByCliniqueId = (Long.parseLong(factureLastNumber.getNumber()) + 1)+"";
             factureLastNumber.setNumber(lastFactureNumberByCliniqueId);
-            factureLastNumberRepository.save(factureLastNumber);
+            factureLastNumberService.save(factureLastNumber);
         }else {
              factureLastNumber = new FactureLastNumber(cliniqueService.findByCliniqueId(cliniqueId),"1");
-            factureLastNumberRepository.save(factureLastNumber);
+            factureLastNumberService.save(factureLastNumber);
         }
         return lastFactureNumberByCliniqueId;
     }
@@ -105,14 +112,12 @@ public class FactureServiceImpl implements FactureService{
     }
 
     @Override
-    public void removeSeanceFromFacture(Optional<Seance> seance) {
-        if(seance.isPresent()) {
-            Facture facture = findBySeancesContains(seance.get());
+    public void removeSeanceFromFacture(Seance seance) {
+            Facture facture = findBySeancesContains(seance);
             if(facture !=null) {
-                facture.getSeances().remove(seance.get());
+                facture.getSeances().remove(seance);
                 save(facture);
             }
-        }
     }
 
     @Override
@@ -162,6 +167,94 @@ public class FactureServiceImpl implements FactureService{
 
     }
 
+    @Override
+    public void deleteAllAbscenceSeance(long patientId, List<Integer> absence, LocalDate startDate, LocalDate endDate) {
+        SortedSet<Seance> seanceSortedSet = seanceService.findByPatientIdAndDateGreaterThanEqualAndDateLessThanEqual(patientId + "",
+                startDate, endDate);
+        if (absence != null && absence.size() > 0) {
+            for (Seance aSeance : seanceSortedSet
+            ) {
+                if (absence.contains(aSeance.getDate().getDayOfMonth())) {
+                    removeSeanceFromFacture(aSeance);
+                    seanceService.delete(aSeance.getId());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void postPatientAndSeance(PatientAndAbscenceDto patientAndAbscenceDto, String token,
+                                     LocalDate startDate,LocalDate endDate) {
+        log.debug("Create/update  patient");
+
+        Patient patient = patientService.findByNumAffiliation(patientAndAbscenceDto.getPatient().getNumAffiliation());
+
+        long cliniqueId = jwtUtilil.getCliniqueId(token).longValue();
+
+        updateLastBorderauNumber(patientAndAbscenceDto, cliniqueId);
+
+        updateLastFactureNumber(patientAndAbscenceDto, cliniqueId);
+
+        updatePatient(patientAndAbscenceDto, patient);
+
+
+
+
+        seanceService.postSeancesOfPatient(patientAndAbscenceDto.getPatient().getId()+""
+                , patientAndAbscenceDto.getTypeSeanceId()
+                , startDate
+                , endDate);
+
+        deleteAllAbscenceSeance(patientAndAbscenceDto.getPatient().getId()
+                , patientAndAbscenceDto.getAbscence()
+                , startDate
+                , endDate);
+    }
+
+    private void updatePatient(PatientAndAbscenceDto patientAndAbscenceDto, Patient patient) {
+        if(patient !=null){
+
+            patientAndAbscenceDto.getPatient().setId(patient.getId());
+            patientAndAbscenceDto.getPatient().setUser(patient.getUser());
+            //todo add prise en charge if it is new and dont replace existing one
+            patientAndAbscenceDto.getPatient().
+                    getPriseEnCharges().get(0).setId(patient.getPriseEnCharges().get(0).getId());
+        }
+
+
+        patientService.save(patientAndAbscenceDto.getPatient());
+    }
+
+    private void updateLastFactureNumber(PatientAndAbscenceDto patientAndAbscenceDto, long cliniqueId) {
+        if( patientAndAbscenceDto.getFactureNumber()!=null && !"{{factureNumber}}".equals(patientAndAbscenceDto.getFactureNumber())){
+
+            FactureLastNumber factureLastNumber = factureLastNumberService
+                    .findByCliniqueId(cliniqueId);
+            if(factureLastNumber!=null){
+                factureLastNumber.setNumber((Long.parseLong(patientAndAbscenceDto.getFactureNumber())-1)+"");
+            }else{
+                factureLastNumber = new FactureLastNumber(cliniqueService.findByCliniqueId(cliniqueId),
+                        (Long.parseLong(patientAndAbscenceDto.getFactureNumber())-1)+"");
+            }
+            factureLastNumberService.save(factureLastNumber);
+        }
+    }
+
+    private void updateLastBorderauNumber(PatientAndAbscenceDto patientAndAbscenceDto, long cliniqueId) {
+        //update or create last borderau number
+        if( patientAndAbscenceDto.getBorederauNumber()!=null && !"{{borederauNumber}}".equals(patientAndAbscenceDto.getBorederauNumber())){
+
+            BorderauLastNumber borderauLastNumber = borderauLastNumberRepository
+                    .findByCliniqueId(cliniqueId);
+            if(borderauLastNumber!=null){
+                borderauLastNumber.setNumber((Long.parseLong(patientAndAbscenceDto.getBorederauNumber())-1)+"");
+            }else{
+                borderauLastNumber = new BorderauLastNumber(cliniqueService.findByCliniqueId(cliniqueId),
+                        (Long.parseLong(patientAndAbscenceDto.getBorederauNumber())-1)+"");
+            }
+            borderauLastNumberRepository.save(borderauLastNumber);
+        }
+    }
 
 
 }

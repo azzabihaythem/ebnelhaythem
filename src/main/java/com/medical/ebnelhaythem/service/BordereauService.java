@@ -3,8 +3,6 @@ package com.medical.ebnelhaythem.service;
 import com.itextpdf.text.DocumentException;
 import com.medical.ebnelhaythem.entity.BorderauLastNumber;
 import com.medical.ebnelhaythem.entity.Bordereau;
-import com.medical.ebnelhaythem.entity.Facture;
-
 import java.io.ByteArrayInputStream;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -15,6 +13,11 @@ public interface BordereauService {
     BorderauLastNumber findByCliniqueId(Long cliniqueId);
 
     Bordereau createBorderaByPatientsAndDate(List<Long> patientIds, LocalDate startDate, LocalDate endDate, long cliniqueId);
+
     Bordereau findByDateAndCliniqueId(LocalDate date,long cliniqueId);
+
     ByteArrayInputStream getBorderauPdf(Bordereau bordereau) throws DocumentException, ParseException;
+
+    BorderauLastNumber save(BorderauLastNumber borderauLastNumber);
+
 }

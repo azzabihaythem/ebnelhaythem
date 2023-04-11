@@ -20,4 +20,6 @@ public interface PatientService {
     public Page<Patient> findAll(Pageable pageable);
 
     public void updateAllPatientStatus(Boolean active,Long cliniqueId);
+
+    Patient findByNumAffiliation(String numAffiliation);
 }

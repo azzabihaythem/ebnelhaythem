@@ -1,13 +1,13 @@
 package com.medical.ebnelhaythem.service;
 
 import com.itextpdf.text.DocumentException;
+import com.medical.ebnelhaythem.dto.PatientAndAbscenceDto;
 import com.medical.ebnelhaythem.entity.Facture;
 import com.medical.ebnelhaythem.entity.Seance;
 
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface FactureService {
 
@@ -25,7 +25,12 @@ public interface FactureService {
 
     List<Facture> findByDateAndPatientIdIn(LocalDate endDate,List<Long> patientIds);
 
-    void removeSeanceFromFacture(Optional<Seance> seance);
+    void removeSeanceFromFacture(Seance seance);
 
     Facture findBySeancesContains(Seance seance);
+
+    void deleteAllAbscenceSeance(long patientId, List<Integer> abscence, LocalDate startDate, LocalDate endDate);
+
+    void postPatientAndSeance(PatientAndAbscenceDto patientAndAbscenceDto, String token,
+                              LocalDate startDate,LocalDate endDate);
 }

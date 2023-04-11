@@ -36,6 +36,11 @@ public class BordereauServiceImpl implements BordereauService{
     }
 
     @Override
+    public BorderauLastNumber save(BorderauLastNumber borderauLastNumber) {
+        return borderauLastNumberRepository.save(borderauLastNumber);
+    }
+
+    @Override
     public Bordereau createBorderaByPatientsAndDate(List<Long> patientIds, LocalDate startDate,
                                                     LocalDate endDate, long cliniqueId) {
 

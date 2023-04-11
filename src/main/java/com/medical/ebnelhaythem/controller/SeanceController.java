@@ -77,7 +77,7 @@ public class SeanceController {
 
         if(seance.isPresent()) {
 
-            factureService.removeSeanceFromFacture(seance);
+            factureService.removeSeanceFromFacture(seance.get());
 
             seanceService.delete(seanceId);
         }

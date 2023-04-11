@@ -1,10 +1,9 @@
 package com.medical.ebnelhaythem.controller;
 
+import com.medical.ebnelhaythem.dto.PatientAndAbscenceDto;
 import com.medical.ebnelhaythem.entity.Clinique;
 import com.medical.ebnelhaythem.entity.Patient;
-import com.medical.ebnelhaythem.service.CliniqueService;
-import com.medical.ebnelhaythem.service.PatientService;
-import com.medical.ebnelhaythem.service.UserService;
+import com.medical.ebnelhaythem.service.*;
 import com.medical.ebnelhaythem.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +13,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
+
+import java.time.LocalDate;
+
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
+
 
 @RestController
 @RequestMapping(value = "/v1")
@@ -26,6 +30,10 @@ public class PatientController {
     private PatientService patientService;
 
     private CliniqueService cliniqueService;
+
+    private SeanceService seanceService;
+
+    private FactureService factureService;
 
     private JwtUtil jwtUtilil;
 
@@ -129,4 +137,28 @@ public class PatientController {
         patientService.updateAllPatientStatus(active,cliniqueId);
         return new ResponseEntity( HttpStatus.OK);
     }
+
+
+    /**
+     * create or update patient and add all seance in a month (need to consider absence)
+     * @param patientAndAbscenceDto
+     * @return
+     */
+    @PostMapping(path = "/patients/seances/month/{month}/year/{year}", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> postPatientAndSeance(@RequestBody PatientAndAbscenceDto patientAndAbscenceDto,
+                                                  @RequestHeader("Authorization") String token ,
+                                                  @PathVariable Integer month,
+                                                  @PathVariable Integer year){
+
+        LocalDate startDate = LocalDate.of(year, month, 1);
+
+        LocalDate endDate = startDate.with(lastDayOfMonth());
+
+        factureService.postPatientAndSeance(patientAndAbscenceDto,token,startDate,endDate);
+
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+
 }

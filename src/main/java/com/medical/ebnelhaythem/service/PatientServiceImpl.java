@@ -61,4 +61,9 @@ public class PatientServiceImpl implements PatientService{
             patientRepository.save(aPatient);
         }
     }
+
+    @Override
+    public Patient findByNumAffiliation(String numAffiliation) {
+        return patientRepository.findByNumAffiliation(numAffiliation);
+    }
 }
