@@ -24,6 +24,7 @@ public class User extends AbstractPersistable<Long> {
 	@ManyToOne
 	private Clinique clinique;
 
+
 	@JsonProperty
 	@Column(unique = true)
 	private String login;

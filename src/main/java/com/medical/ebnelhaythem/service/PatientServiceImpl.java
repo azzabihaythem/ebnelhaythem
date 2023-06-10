@@ -40,6 +40,12 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
+    public Optional<Patient> findByUserId(Long userId) {
+        Optional<Patient> optionalPatient = patientRepository.findByUserId(userId);
+        return Optional.ofNullable(optionalPatient.orElse(null));
+    }
+
+    @Override
     public void deleteById(Long id) {
         patientRepository.deleteById(id);
     }

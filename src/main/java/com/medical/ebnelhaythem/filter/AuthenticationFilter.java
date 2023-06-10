@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.medical.ebnelhaythem.controller.UserController;
+import com.medical.ebnelhaythem.service.PatientService;
 import com.medical.ebnelhaythem.service.UserService;
 import com.medical.ebnelhaythem.utils.Constants;
 import io.jsonwebtoken.Claims;
@@ -36,6 +37,7 @@ import java.util.stream.Collectors;
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
        private UserService userService;
+       private PatientService patientService;
     private UserController userController = new UserController();
         private AuthenticationManager authenticationManager;
         public AuthenticationFilter(AuthenticationManager authenticationManager, UserService userService) {

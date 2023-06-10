@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -22,8 +23,9 @@ public class Patient extends BaseEntity{
     private String doit;
 
     @JsonProperty
-    @Column
-    private String seanceDays;
+    @Enumerated
+    @ElementCollection(targetClass = DAYS_OF_THE_WEEK.class)
+    private Set<DAYS_OF_THE_WEEK> seanceDays;
 
     @JsonProperty
     @Column

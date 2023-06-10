@@ -84,16 +84,16 @@ public class UserController {
             roleList.add(roleService.findById(roleId)) ;
             user.setRoles(roleList);
             user =  userService.save(user);
-            Patient patient= new Patient();
-            patient.setUser(user);
-            patient.setActive(false);
+           // Patient patient= new Patient();
+           // patient.setUser(user);
+           // patient.setActive(false);
             //patient.setAffile("");
           //  patient.setDoit("");
             //patient.setNumAffiliation("");
            // patient.setSeanceDays(null);
            // patient.setPriseEnCharges(null);
 
-            patientService.save(patient);
+            //patientService.save(patient);
             user.setPassword(null);//hide password for response
         }catch (Exception e ){
             throw  new Exception("incorrect", e);
@@ -165,6 +165,7 @@ public class UserController {
         return new ResponseEntity(userService.findById(userId), HttpStatus.OK);
 
     }
+
 
 
 

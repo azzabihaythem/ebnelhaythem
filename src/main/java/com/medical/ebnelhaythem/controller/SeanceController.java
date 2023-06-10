@@ -75,10 +75,10 @@ public class SeanceController {
     //@CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/seance/update")
     public ResponseEntity<?> updateSeance(@RequestHeader(value = "Authorization") String jwt,
-                                                 @RequestBody Seance seancepayload, @RequestParam Long PId) {
+                                                 @RequestBody Seance seancepayload, @RequestParam Long SId) {
 
         //if (jwtTokenUtil.verificationtoken(jwt) ) {
-        Seance seance = seanceService.findById(PId).get();
+        Seance seance = seanceService.findById(SId).get();
         seance.setPatient(seancepayload.getPatient());
         seance.setSeanceType(seancepayload.getSeanceType());
         seance.setDate(seancepayload.getDate());

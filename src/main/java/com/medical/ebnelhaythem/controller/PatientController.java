@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -33,6 +34,8 @@ public class PatientController {
     private JwtService jwtTokenUtil;
     @Autowired
     private RoleService roleservice ;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(PatientController.class);
@@ -86,7 +89,14 @@ public class PatientController {
 
     }
 
-
+    @GetMapping("/patients/userid/{userId}")
+    public ResponseEntity<Patient> findPatientByUserId(@PathVariable("userId") Long userId) {
+        Optional<Patient> patient = patientService.findByUserId(userId);
+        if (patient == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity(patient.get(), HttpStatus.OK);
+    }
 
     /**
      * create patient (with user and prise en charge) endPoint
@@ -102,6 +112,8 @@ public class PatientController {
         roleList.add(roleservice.findById(4L)) ;
         patientUser.setRoles(roleList);
         patient.setUser(patientUser);
+       // patient.getUser().setPassword(passwordEncoder.encode(patient.getUser().getPassword()));
+        patientUser.setPassword(passwordEncoder.encode(patient.getUser().getPassword()));
         return new ResponseEntity(patientService.save(patient), HttpStatus.CREATED);
     }
 
