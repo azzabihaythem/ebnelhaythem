@@ -1,30 +1,13 @@
 package com.medical.ebnelhaythem.utils;
+
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.medical.ebnelhaythem.config.JwtYmlPropertiesConfig;
-import com.medical.ebnelhaythem.utils.Constants;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwsHeader;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
 
 @Service
 @AllArgsConstructor
@@ -65,7 +48,7 @@ public class JwtUtil {
             return true;
         } catch (SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
             throw new BadCredentialsException("INVALID_CREDENTIALS", ex);
-        } catch (ExpiredJwtException ex) {
+        } catch (ExpiredJwtException ex) {s
             throw new ex(header, claims, "Token has Expired", ex);
         }
     }

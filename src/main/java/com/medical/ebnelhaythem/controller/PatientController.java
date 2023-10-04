@@ -46,10 +46,22 @@ public class PatientController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> postClinique(@RequestBody Clinique clinique)
 
-    {   log.debug("Create new clinique");
+    {log.info("Create new clinique");
         return new ResponseEntity(cliniqueService.save(clinique), HttpStatus.CREATED);
     }
 
+    /**
+     * get clinique
+     * @param id
+     * @return
+     */
+    @GetMapping(path = "/clinique/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getClinique(@PathVariable("id") Long id)
+    {
+        log.info("GET Clinique");
+        return new ResponseEntity(cliniqueService.findByCliniqueId(id), HttpStatus.OK);
+    }
     /**
      * create patient (with user and prise en charge) endPoint
      * @param patient

@@ -232,7 +232,7 @@ public class FctrsServiceImpl implements FctrsService {
 		
 		
 		//added 2017    if F0  NOTRE PATIENT
-			//treate real case
+			//todo treate real case (if not local patient)
 		borderauLine = borderauLine + "F0";
 		
 		
