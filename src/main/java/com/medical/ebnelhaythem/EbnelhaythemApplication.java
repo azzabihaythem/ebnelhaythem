@@ -9,10 +9,11 @@ import com.medical.ebnelhaythem.repository.SeanceTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class EbnelhaythemApplication {
@@ -55,9 +56,10 @@ public class EbnelhaythemApplication {
 	}
 
 
-
 		public static void main(String[] args) {
 		SpringApplication.run(EbnelhaythemApplication.class, args);
 	}
+
+
 
 }
