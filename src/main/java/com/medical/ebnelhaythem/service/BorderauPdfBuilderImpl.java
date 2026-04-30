@@ -172,9 +172,13 @@ public class BorderauPdfBuilderImpl implements BorderauPdfBuilder{
 		
 		
 		if (bordereau.getFactures().size() > 0) {
-		
+
+		//	bordereau.setDate(LocalDate.of(2026,2,15));
+
 		LocalDate factureDate = bordereau.getDate();
-		
+
+
+
 		 cal = Calendar.getInstance();
 	    cal.set(Calendar.MONTH, factureDate.getMonth().getValue());
 	    

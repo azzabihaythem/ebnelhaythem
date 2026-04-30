@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
@@ -166,6 +167,7 @@ public class FacturePdfBuilderImpl implements  FacturePdfBuilder{
             cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
             cal.getTime();
             preface = new Paragraph(new Phrase("     Date Facture          : " + facture.getDate().format(cliniqueDateFormatFormatter), normal));
+            //preface = new Paragraph(new Phrase("     Date Facture          : " + LocalDate.of(2026,2,15).format(cliniqueDateFormatFormatter), normal));
             preface.setAlignment(Element.ALIGN_LEFT);
             doc.add(preface);
             preface = new Paragraph(new Phrase("\n", normal));

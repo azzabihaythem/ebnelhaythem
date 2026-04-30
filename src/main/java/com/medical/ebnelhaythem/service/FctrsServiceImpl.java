@@ -40,6 +40,7 @@ public class FctrsServiceImpl implements FctrsService {
 
 	@Override
 	public String borderauLine(Bordereau bordereau) {
+	//	bordereau.setDate(LocalDate.of(2026,2,15));
 		// TODO Auto-generated method stub
 		String borderauLine = "";
 		borderauLine = "1"; // type borderau
@@ -158,6 +159,7 @@ public class FctrsServiceImpl implements FctrsService {
 
 	@Override
 	public String factureLines(Bordereau bordereau) {
+		//bordereau.setDate(LocalDate.of(2026,2,15));
 		String cliniqueDateFormat ="yyyyMMdd";
 
 		DateTimeFormatter cliniqueDateFormatFormatter = DateTimeFormatter.ofPattern(cliniqueDateFormat);
@@ -206,11 +208,9 @@ public class FctrsServiceImpl implements FctrsService {
 		
 		borderauLine = borderauLine + factNumber;
 
-		
-		borderauLine = borderauLine
-				+ bordereau.getClinique().getCodeBureauxRegional();// code
-																			// bureau
-																			// r�gional
+
+			borderauLine = borderauLine
+					+ fact.getPatient().getPriseEnCharges().get(0).getNumber().split(" ")[0];														// r�gional
 		borderauLine = borderauLine + "21";
 
 		
@@ -229,11 +229,14 @@ public class FctrsServiceImpl implements FctrsService {
 			priseEnCharge = "0" + priseEnCharge;
 		}
 		borderauLine = borderauLine + priseEnCharge;
-		
-		
+
+
 		//added 2017    if F0  NOTRE PATIENT
-			//todo treate real case (if not local patient)
-		borderauLine = borderauLine + "F0";
+			if( (fact.getPatient().getPriseEnCharges().get(0).getNumber().split(" ")[0]).equals(bordereau.getClinique().getCodeBureauxRegional()+"") ){
+				borderauLine = borderauLine + "F0";
+			}else{
+				borderauLine = borderauLine + "F1";
+			}
 		
 		
 		
