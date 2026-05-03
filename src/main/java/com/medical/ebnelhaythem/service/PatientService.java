@@ -5,6 +5,7 @@ import com.medical.ebnelhaythem.entity.Patient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PatientService {
@@ -19,7 +20,11 @@ public interface PatientService {
 
     public Page<Patient> findAll(Pageable pageable);
 
+    public List<Patient> findAll();
+
     public void updateAllPatientStatus(Boolean active,Long cliniqueId);
+
+    void deleteAll();
 
     Patient findByNumAffiliation(String numAffiliation);
 }

@@ -103,5 +103,17 @@ public class SeanceServiceImpl implements SeanceService{
         return seanceRepository.findById(seanceId);
     }
 
+    @Override
+    public void deleteAll() {
+        try {
+            log.debug("Deleting all seances");
+            seanceRepository.deleteAll();
+            log.info("All seances deleted successfully");
+        } catch (Exception e) {
+            log.error("Error deleting all seances: ", e);
+            throw new RuntimeException("Failed to delete all seances: " + e.getMessage());
+        }
+    }
+
 
 }

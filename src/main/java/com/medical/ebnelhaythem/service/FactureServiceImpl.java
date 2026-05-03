@@ -211,6 +211,11 @@ public class FactureServiceImpl implements FactureService{
                 , endDate);
     }
 
+    @Override
+    public void deleteAll() {
+        factureRepository.deleteAll();
+    }
+
     private void updatePatient(PatientAndAbscenceDto patientAndAbscenceDto, Patient patient) {
         if(patient !=null){
 
@@ -255,6 +260,8 @@ public class FactureServiceImpl implements FactureService{
             borderauLastNumberRepository.save(borderauLastNumber);
         }
     }
+
+
 
 
 }

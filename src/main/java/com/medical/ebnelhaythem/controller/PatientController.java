@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
@@ -34,6 +35,10 @@ public class PatientController {
     private SeanceService seanceService;
 
     private FactureService factureService;
+
+    private BordereauService bordereauService;
+
+    private FactureLastNumberService factureLastNumberService;
 
     private JwtUtil jwtUtilil;
 
@@ -170,6 +175,65 @@ public class PatientController {
         factureService.postPatientAndSeance(patientAndAbscenceDto,token,startDate,endDate);
 
         return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+
+    // Nouvel endpoint pour supprimer tous les patients avec leurs dépendances
+    @DeleteMapping(path = "/patients/all")
+    public ResponseEntity<?> deleteAllPatients() {
+
+        try {
+            log.warn("========== STARTING DELETE ALL DATA ==========");
+
+            // 1. Supprimer tous les bordereaux
+            bordereauService.deleteAllborderauLastNumber();
+            log.info("Step 1/4: Deleting all bordereaux...");
+            bordereauService.deleteAll();
+            log.info("✓ Bordereaux deleted successfully");
+            factureLastNumberService.deleteAll();
+            // 2. Supprimer toutes les factures
+            log.info("Step 2/4: Deleting all factures...");
+            factureService.deleteAll();
+            log.info("✓ Factures deleted successfully");
+
+            // 3. Supprimer toutes les séances
+            log.info("Step 3/4: Deleting all seances...");
+            seanceService.deleteAll();
+            log.info("✓ Seances deleted successfully");
+
+            // 4. Récupérer tous les patients pour avoir leurs Users
+            List<Patient> allPatients = patientService.findAll();
+
+            // 5. Supprimer les Users d'abord (si nécessaire)
+            for (Patient patient : allPatients) {
+                if (patient.getUser() != null) {
+                    userService.deleteById(patient.getUser().getId());
+                }
+            }
+
+            // 6. Supprimer tous les patients
+            log.info("Step 4/4: Deleting all patients...");
+            patientService.deleteAll();
+            log.info("✓ Patients deleted successfully");
+
+            log.info("✅ All data deleted successfully");
+
+            return new ResponseEntity<>(
+                    "✅ Successfully deleted:\n" +
+                            "- All bordereaux\n" +
+                            "- All factures\n" +
+                            "- All seances\n" +
+                            "- All patients",
+                    HttpStatus.OK
+            );
+
+        } catch (Exception e) {
+            log.error("Error deleting all data: ", e);
+            return new ResponseEntity<>(
+                    "❌ Error deleting data: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
 

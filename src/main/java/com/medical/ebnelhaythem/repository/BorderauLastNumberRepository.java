@@ -8,5 +8,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface BorderauLastNumberRepository extends JpaRepository<BorderauLastNumber, Long> {
 
     BorderauLastNumber findByCliniqueId(Long cliniqueId);
-
+    void deleteAll();
 }

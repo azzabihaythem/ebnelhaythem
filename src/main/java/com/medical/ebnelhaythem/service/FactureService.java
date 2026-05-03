@@ -33,4 +33,6 @@ public interface FactureService {
 
     void postPatientAndSeance(PatientAndAbscenceDto patientAndAbscenceDto, String token,
                               LocalDate startDate,LocalDate endDate);
+
+    void deleteAll();
 }

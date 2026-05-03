@@ -28,4 +28,6 @@ public interface SeanceService {
                                                                                          LocalDate endDate);
 
      public Optional<Seance> findById(Long  seanceId);
+
+     public void deleteAll();
 }

@@ -12,6 +12,8 @@ public interface BordereauService {
 
     BorderauLastNumber findByCliniqueId(Long cliniqueId);
 
+    void deleteAllborderauLastNumber();
+
     Bordereau createBorderaByPatientsAndDate(List<Long> patientIds, LocalDate startDate, LocalDate endDate, long cliniqueId);
 
     Bordereau findByDateAndCliniqueId(LocalDate date,long cliniqueId);
@@ -20,4 +22,5 @@ public interface BordereauService {
 
     BorderauLastNumber save(BorderauLastNumber borderauLastNumber);
 
+    void deleteAll();
 }

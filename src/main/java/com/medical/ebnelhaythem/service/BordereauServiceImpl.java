@@ -34,10 +34,26 @@ public class BordereauServiceImpl implements BordereauService{
     public BorderauLastNumber findByCliniqueId(Long cliniqueId) {
         return borderauLastNumberRepository.findByCliniqueId(cliniqueId);
     }
+    @Override
+    public void deleteAllborderauLastNumber() {
+         borderauLastNumberRepository.deleteAll();
+    }
 
     @Override
     public BorderauLastNumber save(BorderauLastNumber borderauLastNumber) {
         return borderauLastNumberRepository.save(borderauLastNumber);
+    }
+
+    @Override
+    public void deleteAll() {
+        try {
+            log.debug("Deleting all bordereaux");
+            bordereauRepository.deleteAll();
+            log.info("All bordereaux deleted successfully");
+        } catch (Exception e) {
+            log.error("Error deleting all bordereaux: ", e);
+            throw new RuntimeException("Failed to delete all bordereaux: " + e.getMessage());
+        }
     }
 
     @Override

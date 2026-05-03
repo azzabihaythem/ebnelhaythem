@@ -22,4 +22,9 @@ public class FactureLastNumberServiceImpl implements FactureLastNumberService{
     public FactureLastNumber save(FactureLastNumber factureLastNumber) {
         return factureLastNumberRepository.save(factureLastNumber);
     }
+
+    @Override
+    public void deleteAll() {
+         factureLastNumberRepository.deleteAll();
+    }
 }
